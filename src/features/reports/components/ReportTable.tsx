@@ -62,14 +62,17 @@ function ReportTable({ rows }: Props) {
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-forest to-olive text-white font-bold">
-                        {index + 1}
-                      </div>
+                      <div className={`h-10 w-1.5 rounded-full bg-gradient-to-b ${
+                        index === 0 ? 'from-yellow-500 to-yellow-600' :
+                        index === 1 ? 'from-gray-400 to-gray-500' :
+                        index === 2 ? 'from-orange-400 to-orange-500' :
+                        'from-forest to-olive'
+                      }`} />
                       <div>
-                        <p className="font-bold text-gray-900 group-hover:text-forest transition-colors">
+                        <p className="font-bold text-gray-900 group-hover:text-forest transition-colors whitespace-nowrap">
                           {row.unitName}
                         </p>
-                        <p className="text-xs text-gray-500">ID: {row.unitId}</p>
+                        <p className="text-xs text-gray-500 whitespace-nowrap">ID: {row.unitId}</p>
                       </div>
                     </div>
                   </td>

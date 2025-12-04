@@ -61,6 +61,7 @@ function CourseListPage() {
           createCourse(payload);
           closeModal();
         }}
+        onCancel={closeModal}
       />,
     );
   };
@@ -74,6 +75,7 @@ function CourseListPage() {
           updateCourse(course.id, payload);
           closeModal();
         }}
+        onCancel={closeModal}
       />,
     );
   };

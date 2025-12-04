@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
 import StatsCards from "../components/StatsCards";
 import UpcomingSessionsWidget from "../components/UpcomingSessionsWidget";
 import Card from "@/components/common/Card";
 import Tag from "@/components/common/Tag";
 import Button from "@/components/common/Button";
+import Select from "@/components/common/Select";
+import SearchInput from "@/components/common/SearchInput";
+import Pagination from "@/components/common/Pagination";
 import { useTrainingStore } from "@/store/trainingStore";
-import { Shield, Users, Target, Award, TrendingUp, AlertTriangle, Activity, Clock, Calendar, ChevronRight, Zap, Database, Globe } from "lucide-react";
+import { Shield, Users, Target, Award, TrendingUp, AlertTriangle, Activity, Clock, Calendar, ChevronRight, Zap, Database, Globe, CheckCircle, Trophy, Grid3x3, List, LayoutGrid, Filter, Search, ChevronDown, ChevronUp } from "lucide-react";
 
 function AdminDashboardPage() {
   const sessions = useTrainingStore((s) => s.sessions);
@@ -15,14 +19,56 @@ function AdminDashboardPage() {
     s.getReport({ from: "2024-01-01", to: "2024-12-31", unitId: undefined }),
   );
 
+  const navigate = useNavigate();
+
+  // Search and filter states
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [viewMode, setViewMode] = useState<"cards" | "table" | "list">("cards");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [expandedSections, setExpandedSections] = useState({ excellent: true, needSupport: true });
+  const itemsPerPage = viewMode === "cards" ? 6 : 20;
+
+  // Filter options
+  const statusOptions = [
+    { value: "all", label: "Tất cả trạng thái" },
+    { value: "excellent", label: "Xuất sắc (≥80%)" },
+    { value: "good", label: "Đạt yêu cầu (50-79%)" },
+    { value: "poor", label: "Cần cải thiện (<50%)" }
+  ];
+
+  // Filtered and paginated data
+  const filteredReport = useMemo(() => {
+    return report.filter(item => {
+      const matchesSearch = item.unitName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           item.unitId.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesStatus = statusFilter === "all" ||
+        (statusFilter === "excellent" && item.completionRate >= 80) ||
+        (statusFilter === "good" && item.completionRate >= 50 && item.completionRate < 80) ||
+        (statusFilter === "poor" && item.completionRate < 50);
+
+      return matchesSearch && matchesStatus;
+    });
+  }, [report, searchQuery, statusFilter]);
+
+  const totalPages = Math.ceil(filteredReport.length / itemsPerPage);
+  const paginatedReport = filteredReport.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const totalSessions = sessions.length;
   const completionRate = Math.round(
     (enrollments.filter((e) => e.status === "COMPLETED").length / Math.max(enrollments.length, 1)) * 100,
   );
-  const topUnits = [...report].sort((a, b) => b.completionRate - a.completionRate).slice(0, 3);
-  const weakUnits = [...report].sort((a, b) => a.completionRate - b.completionRate).slice(0, 2);
+  const topUnits = [...filteredReport].sort((a, b) => b.completionRate - a.completionRate).slice(0, 3);
+  const weakUnits = [...filteredReport].sort((a, b) => a.completionRate - b.completionRate).slice(0, 2);
   const upcoming = sessions.slice(0, 3);
-  const navigate = useNavigate();
+
+  const toggleSection = (section: 'excellent' | 'needSupport') => {
+    setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
@@ -155,91 +201,386 @@ function AdminDashboardPage() {
             <UpcomingSessionsWidget sessions={upcoming} />
           </div>
 
-          <Card
-            className="bg-gradient-to-br from-white to-gray-50 border-2 border-forest/10 shadow-lg"
-            title={
+          <div className="space-y-4">
+            {/* Filter Bar */}
+            <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Filter className="h-5 w-5 text-forest" />
+                    <h3 className="font-semibold text-forest">Lọc & Tìm kiếm</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setViewMode('cards')}
+                      className={`rounded-lg p-2 transition-colors ${
+                        viewMode === 'cards' ? 'bg-forest text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      <LayoutGrid className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode('table')}
+                      className={`rounded-lg p-2 transition-colors ${
+                        viewMode === 'table' ? 'bg-forest text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      <Grid3x3 className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`rounded-lg p-2 transition-colors ${
+                        viewMode === 'list' ? 'bg-forest text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      <List className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <SearchInput
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    placeholder="Tìm theo tên hoặc mã đơn vị..."
+                  />
+                  <Select
+                    options={statusOptions}
+                    value={statusFilter}
+                    onChange={setStatusFilter}
+                    placeholder="Lọc theo trạng thái"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">
+                    Tìm thấy <span className="font-semibold text-forest">{filteredReport.length}</span> đơn vị
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setStatusFilter("all");
+                      setCurrentPage(1);
+                    }}
+                    className="text-forest hover:underline"
+                  >
+                    Xóa bộ lọc
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Database className="h-5 w-5 text-forest" />
-                <span className="font-bold text-forest">Tình Hình Đơn Vị</span>
+                <h3 className="font-bold text-forest">Tình Hình Đơn Vị</h3>
               </div>
-            }
-            extra={
               <span className="inline-flex items-center gap-1 rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">
                 <Clock className="h-3 w-3" />
                 Tuần này
               </span>
-            }
-          >
-            <div className="space-y-4">
-              <div>
-                <div className="mb-3 flex items-center gap-2">
+            </div>
+
+            {/* Top performing units */}
+            <div>
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Đơn vị xuất sắc</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Đơn vị xuất sắc ({topUnits.length})</p>
                 </div>
-                <div className="space-y-2">
+                <button
+                  onClick={() => toggleSection('excellent')}
+                  className="p-1 hover:bg-gray-100 rounded transition-colors"
+                >
+                  {expandedSections.excellent ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </button>
+              </div>
+              {expandedSections.excellent && (
+                <div className="grid gap-3 md:grid-cols-3">
                   {topUnits.map((u, idx) => (
                     <div
                       key={u.unitId}
-                      className="group relative overflow-hidden rounded-lg border border-green-200/50 bg-gradient-to-r from-green-50/50 to-transparent p-3 transition-all hover:shadow-md hover:border-green-300"
+                      className="group relative overflow-hidden rounded-xl border border-green-200/50 bg-gradient-to-br from-white to-green-50/30 p-4 shadow-sm transition-all hover:shadow-lg hover:scale-[1.02]"
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className={`flex h-8 w-8 items-center justify-center rounded-lg font-bold text-white ${
-                            idx === 0 ? 'bg-gradient-to-br from-yellow-500 to-yellow-600' :
-                            idx === 1 ? 'bg-gradient-to-br from-gray-400 to-gray-500' :
-                            'bg-gradient-to-br from-orange-400 to-orange-500'
+                      {/* Rank indicator */}
+                      <div className={`absolute top-0 left-0 w-full h-1 ${
+                        idx === 0 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                        idx === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
+                        'bg-gradient-to-r from-orange-400 to-orange-500'
+                      }`} />
+
+                      {/* Unit info */}
+                      <div className="mb-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="font-bold text-forest text-lg">{units.find((x) => x.id === u.unitId)?.name ?? u.unitId}</h4>
+                          <div className={`rounded-full p-1.5 ${
+                            idx === 0 ? 'bg-yellow-100' :
+                            idx === 1 ? 'bg-gray-100' :
+                            'bg-orange-100'
                           }`}>
-                            {idx + 1}
-                          </div>
-                          <div>
-                            <div className="font-semibold text-forest">{units.find((x) => x.id === u.unitId)?.name ?? u.unitId}</div>
-                            <p className="mb-0 text-xs text-gray-600">{u.totalSessions} buổi huấn luyện</p>
+                            <Trophy className={`h-4 w-4 ${
+                              idx === 0 ? 'text-yellow-600' :
+                              idx === 1 ? 'text-gray-600' :
+                              'text-orange-600'
+                            }`} />
                           </div>
                         </div>
-                        <div className="text-right">
-                          <span className="text-lg font-bold text-green-600">{u.completionRate}%</span>
-                          <div className="mt-1 h-1.5 w-16 rounded-full bg-gray-200">
-                            <div className="h-full rounded-full bg-gradient-to-r from-green-400 to-green-600" style={{width: `${u.completionRate}%`}} />
+                        <p className="text-xs text-gray-500">ID: {u.unitId}</p>
+                      </div>
+
+                      {/* Stats */}
+                      <div className="grid grid-cols-2 gap-3 mb-3">
+                        <div className="text-center p-2 bg-blue-50 rounded-lg">
+                          <div className="flex items-center justify-center gap-1 mb-1">
+                            <Calendar className="h-3 w-3 text-blue-600" />
+                            <span className="text-xs text-blue-600 font-medium">Số buổi</span>
                           </div>
+                          <p className="text-lg font-bold text-blue-700">{u.totalSessions}</p>
+                        </div>
+                        <div className="text-center p-2 bg-green-50 rounded-lg">
+                          <div className="flex items-center justify-center gap-1 mb-1">
+                            <Users className="h-3 w-3 text-green-600" />
+                            <span className="text-xs text-green-600 font-medium">SQ chưa đủ</span>
+                          </div>
+                          <p className="text-lg font-bold text-green-700">0</p>
+                        </div>
+                      </div>
+
+                      {/* Progress */}
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-600">Hoàn thành</span>
+                          <span className="text-sm font-bold text-green-600">{u.completionRate}%</span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-gray-200">
+                          <div className="h-full rounded-full bg-gradient-to-r from-green-400 to-green-600 transition-all" style={{width: `${u.completionRate}%`}} />
+                        </div>
+                        <div className="flex justify-center mt-2">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                            <CheckCircle className="h-3 w-3" />
+                            Xuất sắc
+                          </span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              )}
+            </div>
 
-              <div>
-                <div className="mb-3 flex items-center gap-2">
+            {/* Units needing support */}
+            <div>
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange" />
-                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Cần hỗ trợ khẩn cấp</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Cần hỗ trợ khẩn cấp ({weakUnits.length})</p>
                 </div>
-                <div className="space-y-2">
+                <button
+                  onClick={() => toggleSection('needSupport')}
+                  className="p-1 hover:bg-gray-100 rounded transition-colors"
+                >
+                  {expandedSections.needSupport ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </button>
+              </div>
+              {expandedSections.needSupport && (
+                <div className="grid gap-3 md:grid-cols-2">
                   {weakUnits.map((u) => (
                     <div
                       key={u.unitId}
-                      className="group relative overflow-hidden rounded-lg border border-orange-200/50 bg-gradient-to-r from-orange-50/50 to-transparent p-3 transition-all hover:shadow-md hover:border-orange-300"
+                      className="group relative overflow-hidden rounded-xl border border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 p-4 shadow-sm transition-all hover:shadow-lg hover:scale-[1.02]"
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-400" />
+
+                      <div className="flex items-start justify-between mb-3">
                         <div>
-                          <div className="font-semibold text-forest">{units.find((x) => x.id === u.unitId)?.name ?? u.unitId}</div>
-                          <p className="mb-0 flex items-center gap-1 text-xs text-orange-700">
-                            <AlertTriangle className="h-3 w-3" />
-                            {u.pendingSoldiers} quân nhân chưa đạt
-                          </p>
+                          <h4 className="font-bold text-forest text-lg">{units.find((x) => x.id === u.unitId)?.name ?? u.unitId}</h4>
+                          <p className="text-xs text-gray-500">ID: {u.unitId}</p>
                         </div>
-                        <div className="text-right">
-                          <span className="text-lg font-bold text-orange-600">{u.completionRate}%</span>
-                          <div className="mt-1 h-1.5 w-16 rounded-full bg-gray-200">
-                            <div className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-400" style={{width: `${u.completionRate}%`}} />
-                          </div>
+                        <div className="rounded-full bg-red-100 p-1.5">
+                          <AlertTriangle className="h-4 w-4 text-red-600" />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between mb-3 p-3 bg-red-50 rounded-lg">
+                        <div className="flex items-center gap-2">
+                          <Users className="h-4 w-4 text-red-600" />
+                          <span className="text-sm font-medium text-red-700">Quân nhân chưa đạt</span>
+                        </div>
+                        <span className="text-lg font-bold text-red-600">{u.pendingSoldiers}</span>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-600">Tiến độ</span>
+                          <span className="text-sm font-bold text-orange-600">{u.completionRate}%</span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-gray-200">
+                          <div className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-400 transition-all" style={{width: `${u.completionRate}%`}} />
+                        </div>
+                        <div className="flex justify-center mt-2">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                            <AlertTriangle className="h-3 w-3" />
+                            Cần cải thiện
+                          </span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              )}
             </div>
-          </Card>
+
+            {/* Pagination */}
+            {filteredReport.length > itemsPerPage && (
+              <div className="mt-4">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                  totalItems={filteredReport.length}
+                  itemsPerPage={itemsPerPage}
+                />
+              </div>
+            )}
+
+            {/* All Units Section - Shows when there are many units */}
+            {filteredReport.length > 5 && (
+              <div className="mt-6 rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="font-bold text-forest">Tất cả đơn vị ({filteredReport.length})</h3>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => navigate("/reports")}
+                  >
+                    Xem báo cáo chi tiết
+                    <ChevronRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
+
+                {viewMode === "table" ? (
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-gray-600">Đơn vị</th>
+                          <th className="px-4 py-2 text-center text-xs font-semibold text-gray-600">Buổi</th>
+                          <th className="px-4 py-2 text-center text-xs font-semibold text-gray-600">Hoàn thành</th>
+                          <th className="px-4 py-2 text-center text-xs font-semibold text-gray-600">Thiếu</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        {paginatedReport.map(unit => (
+                          <tr key={unit.unitId} className="hover:bg-gray-50 transition-colors">
+                            <td className="px-4 py-3">
+                              <div>
+                                <p className="font-medium text-gray-900">{unit.unitName}</p>
+                                <p className="text-xs text-gray-500">{unit.unitId}</p>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 text-center">
+                              <span className="font-medium">{unit.totalSessions}</span>
+                            </td>
+                            <td className="px-4 py-3 text-center">
+                              <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
+                                unit.completionRate >= 80 ? 'bg-green-100 text-green-700' :
+                                unit.completionRate >= 50 ? 'bg-orange-100 text-orange-700' :
+                                'bg-red-100 text-red-700'
+                              }`}>
+                                {unit.completionRate}%
+                              </span>
+                            </td>
+                            <td className="px-4 py-3 text-center">
+                              <span className={`font-medium ${
+                                unit.pendingSoldiers > 0 ? 'text-red-600' : 'text-green-600'
+                              }`}>
+                                {unit.pendingSoldiers}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : viewMode === "list" ? (
+                  <div className="space-y-2">
+                    {paginatedReport.map(unit => (
+                      <div
+                        key={unit.unitId}
+                        className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/50 p-3 hover:bg-gray-100 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`h-2 w-2 rounded-full ${
+                            unit.completionRate >= 80 ? 'bg-green-500' :
+                            unit.completionRate >= 50 ? 'bg-orange-500' :
+                            'bg-red-500'
+                          }`} />
+                          <div>
+                            <p className="font-medium text-gray-900">{unit.unitName}</p>
+                            <p className="text-xs text-gray-500">{unit.unitId}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-6">
+                          <div className="text-center">
+                            <p className="text-xs text-gray-500">Buổi</p>
+                            <p className="font-semibold">{unit.totalSessions}</p>
+                          </div>
+                          <div className="text-center">
+                            <p className="text-xs text-gray-500">Hoàn thành</p>
+                            <p className="font-semibold text-green-600">{unit.completionRate}%</p>
+                          </div>
+                          <div className="text-center">
+                            <p className="text-xs text-gray-500">Thiếu</p>
+                            <p className={`font-semibold ${
+                              unit.pendingSoldiers > 0 ? 'text-red-600' : 'text-green-600'
+                            }`}>
+                              {unit.pendingSoldiers}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {paginatedReport.map(unit => (
+                      <div
+                        key={unit.unitId}
+                        className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-all"
+                      >
+                        <div className="mb-3 flex items-center justify-between">
+                          <h4 className="font-semibold text-gray-900">{unit.unitName}</h4>
+                          <span className={`h-2 w-2 rounded-full ${
+                            unit.completionRate >= 80 ? 'bg-green-500' :
+                            unit.completionRate >= 50 ? 'bg-orange-500' :
+                            'bg-red-500'
+                          }`} />
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Số buổi:</span>
+                            <span className="font-medium">{unit.totalSessions}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Hoàn thành:</span>
+                            <span className="font-medium text-green-600">{unit.completionRate}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Quân nhân thiếu:</span>
+                            <span className={`font-medium ${
+                              unit.pendingSoldiers > 0 ? 'text-red-600' : 'text-green-600'
+                            }`}>
+                              {unit.pendingSoldiers}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">

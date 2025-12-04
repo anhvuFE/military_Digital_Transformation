@@ -7,6 +7,8 @@ import SessionListPage from "@/features/sessions/pages/SessionListPage";
 import PersonalResultsPage from "@/features/results/pages/PersonalResultsPage";
 import ReportPage from "@/features/reports/pages/ReportPage";
 import CommendationPage from "@/features/commendations/pages/CommendationPage";
+import UserProfilePage from "@/features/profile/pages/UserProfilePage";
+import UserTrainingHistoryPage from "@/features/training/pages/UserTrainingHistoryPage";
 import RoleGuard from "@/components/common/RoleGuard";
 import { useAuthStore } from "@/store/authStore";
 
@@ -65,6 +67,30 @@ function Router() {
         element={
           <RoleGuard allow={["ADMIN"]}>
             <CommendationPage />
+          </RoleGuard>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <RoleGuard allow={["SOLDIER"]}>
+            <UserProfilePage />
+          </RoleGuard>
+        }
+      />
+      <Route
+        path="/training-history"
+        element={
+          <RoleGuard allow={["SOLDIER"]}>
+            <UserTrainingHistoryPage />
+          </RoleGuard>
+        }
+      />
+      <Route
+        path="/achievements"
+        element={
+          <RoleGuard allow={["SOLDIER"]}>
+            <PersonalResultsPage />
           </RoleGuard>
         }
       />

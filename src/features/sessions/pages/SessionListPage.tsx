@@ -55,6 +55,7 @@ function SessionListPage() {
           createSession(payload);
           closeModal();
         }}
+        onCancel={closeModal}
       />,
     );
 
@@ -69,6 +70,7 @@ function SessionListPage() {
           updateSession(session.id, payload);
           closeModal();
         }}
+        onCancel={closeModal}
       />,
     );
 
@@ -82,6 +84,7 @@ function SessionListPage() {
           rows.forEach((row) => setEnrollment({ ...row, sessionId: session.id, userId: row.userId }));
           closeModal();
         }}
+        onCancel={closeModal}
       />,
     );
   };

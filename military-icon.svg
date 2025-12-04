@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f2f26;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#314031;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b29b67;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b7355;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="url(#bg)"/>
+
+  <!-- Outer ring -->
+  <circle cx="16" cy="16" r="14" fill="none" stroke="url(#gold)" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Shield shape with gradient -->
+  <path d="M16 5C16 5 23 7.5 23 7.5V14C23 19.5 19.5 24 16 26C12.5 24 9 19.5 9 14V7.5C9 7.5 16 5 16 5Z"
+        fill="#0f1a13"
+        stroke="url(#gold)"
+        stroke-width="1.2"/>
+
+  <!-- Inner shield accent -->
+  <path d="M16 6.5C16 6.5 21.5 8.5 21.5 8.5V14C21.5 18.5 18.5 22.5 16 24.5C13.5 22.5 10.5 18.5 10.5 14V8.5C10.5 8.5 16 6.5 16 6.5Z"
+        fill="#1f2f26"
+        opacity="0.7"/>
+
+  <!-- Star with better proportions -->
+  <path d="M16 10L17.2 13L20.5 13.3L18.2 15.5L18.8 18.8L16 17.2L13.2 18.8L13.8 15.5L11.5 13.3L14.8 13Z"
+        fill="url(#gold)"/>
+
+  <!-- Small decorative elements -->
+  <circle cx="16" cy="22" r="0.8" fill="url(#gold)" opacity="0.8"/>
+  <rect x="15.5" y="20" width="1" height="2" fill="url(#gold)" opacity="0.6"/>
+</svg>

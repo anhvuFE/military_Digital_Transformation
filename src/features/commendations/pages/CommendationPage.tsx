@@ -50,7 +50,7 @@ function CommendationPage() {
                   Tạo đề xuất
                 </Button>
                 <Button
-                  className="bg-gradient-to-r from-yellow-500 to-orange text-white hover:from-yellow-600 hover:to-orange/90 border-0"
+                  className="bg-forest text-sand hover:bg-olive border-0 shadow-md"
                 >
                   <Download className="mr-2 h-4 w-4" />
                   Xuất quyết định
@@ -224,8 +224,8 @@ function CommendationPage() {
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex gap-3">
-                      <div className="rounded-lg bg-gradient-to-br from-yellow-100 to-orange-100 p-3">
-                        <Trophy className="h-6 w-6 text-orange-600" />
+                      <div className="rounded-lg bg-gradient-to-br from-yellow-100 to-yellow-200 p-3">
+                        <Trophy className="h-6 w-6 text-yellow-600" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-forest">{item.title}</h4>

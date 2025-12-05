@@ -5,6 +5,7 @@ import SoldierDashboardPage from "@/features/dashboard/pages/SoldierDashboardPag
 import CourseListPage from "@/features/courses/pages/CourseListPage";
 import SessionListPage from "@/features/sessions/pages/SessionListPage";
 import PersonalResultsPage from "@/features/results/pages/PersonalResultsPage";
+import AchievementsPage from "@/features/achievements/pages/AchievementsPage";
 import ReportPage from "@/features/reports/pages/ReportPage";
 import CommendationPage from "@/features/commendations/pages/CommendationPage";
 import UserProfilePage from "@/features/profile/pages/UserProfilePage";
@@ -90,7 +91,7 @@ function Router() {
         path="/achievements"
         element={
           <RoleGuard allow={["SOLDIER"]}>
-            <PersonalResultsPage />
+            <AchievementsPage />
           </RoleGuard>
         }
       />

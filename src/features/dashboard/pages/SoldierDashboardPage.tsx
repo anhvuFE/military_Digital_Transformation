@@ -4,16 +4,41 @@ import RecentResultsWidget from "../components/RecentResultsWidget";
 import Card from "@/components/common/Card";
 import { useAuthStore } from "@/store/authStore";
 import { useTrainingStore } from "@/store/trainingStore";
-import { User, CheckCircle2, Target, Calendar, Award, TrendingUp, BookOpen, Clock, AlertTriangle, Shield, Activity, ChevronRight, Medal, Briefcase } from "lucide-react";
+import {
+  User,
+  CheckCircle2,
+  Target,
+  Calendar,
+  Award,
+  TrendingUp,
+  BookOpen,
+  Clock,
+  AlertTriangle,
+  Shield,
+  Activity,
+  ChevronRight,
+  Medal,
+  Briefcase,
+} from "lucide-react";
 
 function SoldierDashboardPage() {
   const user = useAuthStore((s) => s.user);
-  const timeline = useTrainingStore((s) => (user ? s.getPersonalTimeline(user.id) : []));
-  const summary = useTrainingStore((s) => (user ? s.getCourseSummaryForUser(user.id) : []));
+  const timeline = useTrainingStore((s) =>
+    user ? s.getPersonalTimeline(user.id) : []
+  );
+  const summary = useTrainingStore((s) =>
+    user ? s.getCourseSummaryForUser(user.id) : []
+  );
 
-  const completed = timeline.filter((t) => t.enrollment.status === "COMPLETED").length;
-  const pendingRequired = summary.filter((s) => s.required && s.completedSessions < s.requiredSessions).length;
-  const upcoming = timeline.filter((t) => t.enrollment.status === "SCHEDULED").map((t) => t.session);
+  const completed = timeline.filter(
+    (t) => t.enrollment.status === "COMPLETED"
+  ).length;
+  const pendingRequired = summary.filter(
+    (s) => s.required && s.completedSessions < s.requiredSessions
+  ).length;
+  const upcoming = timeline
+    .filter((t) => t.enrollment.status === "SCHEDULED")
+    .map((t) => t.session);
   const recentResults = timeline
     .filter((t) => t.enrollment.status === "COMPLETED")
     .slice(0, 4)
@@ -25,7 +50,9 @@ function SoldierDashboardPage() {
       passed: t.enrollment.passed,
     }));
 
-  const missingCourses = summary.filter((s) => s.required && s.completedSessions < s.requiredSessions).slice(0, 4);
+  const missingCourses = summary
+    .filter((s) => s.required && s.completedSessions < s.requiredSessions)
+    .slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
@@ -35,23 +62,28 @@ function SoldierDashboardPage() {
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-              <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+            <div className="flex flex-col gap-2 sm:gap-3 items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-3">
                 <User className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
-              </div>
-              <div className="flex-1">
-                <p className="mb-1 flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
-                  <span className="h-1 w-6 sm:w-8 rounded-full bg-orange flex-shrink-0" />
+                <p className="m-0 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
                   Hồ sơ cá nhân
                 </p>
-                <h1 className="mb-1 sm:mb-2 text-xl sm:text-2xl md:text-3xl font-bold text-sand">Trung Tâm Huấn Luyện Số</h1>
-                <p className="text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Theo dõi tiến độ và hiệu suất huấn luyện cá nhân</p>
+              </div>
+              <div className="space-y-1">
+                <h1 className="m-0 text-xl sm:text-2xl md:text-3xl font-bold text-sand">
+                  Trung Tâm Huấn Luyện Số
+                </h1>
+                <p className="m-0 text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">
+                  Theo dõi tiến độ và hiệu suất huấn luyện cá nhân
+                </p>
               </div>
             </div>
-            <div className="flex flex-row sm:flex-row gap-2 w-full sm:w-auto">
-              <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-sand backdrop-blur-sm">
+            <div className="flex flex-row gap-2 w-full sm:w-auto justify-center sm:justify-start">
+              <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-sand">
                 <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                <span className="truncate max-w-[100px] sm:max-w-none">{user?.fullName || "Quân nhân"}</span>
+                <span className="truncate max-w-[100px] sm:max-w-none">
+                  {user?.fullName || "Quân nhân"}
+                </span>
               </span>
               <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-orange px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white">
                 <Activity className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -70,11 +102,19 @@ function SoldierDashboardPage() {
                 <div className="rounded-lg bg-green-100 p-1.5 sm:p-2">
                   <CheckCircle2 className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
                 </div>
-                <span className="text-[10px] sm:text-xs font-semibold text-green-600">Đạt chuẩn</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-green-600">
+                  Đạt chuẩn
+                </span>
               </div>
-              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Buổi hoàn thành</p>
-              <p className="text-lg sm:text-2xl font-bold text-forest">{completed}</p>
-              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Tiến độ cá nhân</p>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">
+                Buổi hoàn thành
+              </p>
+              <p className="text-lg sm:text-2xl font-bold text-forest">
+                {completed}
+              </p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">
+                Tiến độ cá nhân
+              </p>
             </div>
           </div>
 
@@ -85,11 +125,19 @@ function SoldierDashboardPage() {
                 <div className="rounded-lg bg-orange-100 p-1.5 sm:p-2">
                   <Target className="h-4 w-4 sm:h-6 sm:w-6 text-orange-600" />
                 </div>
-                <span className="text-[10px] sm:text-xs font-semibold text-orange-600">Cần bổ sung</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-orange-600">
+                  Cần bổ sung
+                </span>
               </div>
-              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Khóa còn thiếu</p>
-              <p className="text-lg sm:text-2xl font-bold text-orange-600">{pendingRequired}</p>
-              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Cần hoàn tất</p>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">
+                Khóa còn thiếu
+              </p>
+              <p className="text-lg sm:text-2xl font-bold text-orange-600">
+                {pendingRequired}
+              </p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">
+                Cần hoàn tất
+              </p>
             </div>
           </div>
 
@@ -100,10 +148,14 @@ function SoldierDashboardPage() {
                 <div className="rounded-lg bg-forest/10 p-2">
                   <BookOpen className="h-6 w-6 text-forest" />
                 </div>
-                <span className="text-xs font-semibold text-forest">Tổng cộng</span>
+                <span className="text-xs font-semibold text-forest">
+                  Tổng cộng
+                </span>
               </div>
               <p className="text-sm font-medium text-gray-600">Khóa bắt buộc</p>
-              <p className="text-2xl font-bold text-forest">{summary.filter((s) => s.required).length}</p>
+              <p className="text-2xl font-bold text-forest">
+                {summary.filter((s) => s.required).length}
+              </p>
               <p className="mt-1 text-xs text-gray-500">Toàn bộ chương trình</p>
             </div>
           </div>
@@ -115,11 +167,23 @@ function SoldierDashboardPage() {
                 <div className="rounded-lg bg-blue-100 p-2">
                   <Award className="h-6 w-6 text-blue-600" />
                 </div>
-                <span className="text-xs font-semibold text-blue-600">Tiến bộ</span>
+                <span className="text-xs font-semibold text-blue-600">
+                  Tiến bộ
+                </span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Điểm trung bình</p>
+              <p className="text-sm font-medium text-gray-600">
+                Điểm trung bình
+              </p>
               <p className="text-2xl font-bold text-blue-600">
-                {Math.round(timeline.filter(t => t.enrollment.score).reduce((acc, t) => acc + (t.enrollment.score || 0), 0) / Math.max(timeline.filter(t => t.enrollment.score).length, 1)) || 0}
+                {Math.round(
+                  timeline
+                    .filter((t) => t.enrollment.score)
+                    .reduce((acc, t) => acc + (t.enrollment.score || 0), 0) /
+                    Math.max(
+                      timeline.filter((t) => t.enrollment.score).length,
+                      1
+                    )
+                ) || 0}
               </p>
               <p className="mt-1 text-xs text-gray-500">Hiệu suất học tập</p>
             </div>
@@ -127,13 +191,13 @@ function SoldierDashboardPage() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-xl border border-border bg-white p-6 shadow-lg">
-            <div className="mb-4 flex items-center justify-between">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between px-1 sm:px-0">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-gradient-to-br from-forest to-olive p-2">
-                  <Calendar className="h-5 w-5 text-white" />
-                </div>
-                <h2 className="text-lg font-bold text-forest">Lịch Huấn Luyện Sắp Tới</h2>
+                <Calendar className="h-5 w-5 text-forest" />
+                <h2 className="text-lg font-bold text-forest">
+                  Lịch Huấn Luyện Sắp Tới
+                </h2>
               </div>
               <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-600">
                 <Clock className="h-3 w-3" />
@@ -148,12 +212,13 @@ function SoldierDashboardPage() {
             title={
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-orange-600" />
-                <span className="font-bold text-forest">Khóa Cần Hoàn Thành</span>
+                <span className="font-bold text-forest">
+                  Khóa Cần Hoàn Thành
+                </span>
               </div>
             }
             extra={
               <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-600">
-                <Target className="h-3 w-3" />
                 Ưu tiên cao
               </span>
             }
@@ -161,38 +226,60 @@ function SoldierDashboardPage() {
             {missingCourses.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-8">
                 <Medal className="mb-3 h-12 w-12 text-green-500" />
-                <p className="text-center text-sm font-semibold text-green-600">Đã hoàn thành tất cả khóa yêu cầu!</p>
+                <p className="text-center text-sm font-semibold text-green-600">
+                  Đã hoàn thành tất cả khóa yêu cầu!
+                </p>
               </div>
             ) : (
               <div className="space-y-3">
                 {missingCourses.map((item, idx) => (
                   <div
                     key={item.course.id}
-                    className="group relative overflow-hidden rounded-lg border border-orange-200/50 bg-gradient-to-r from-white to-orange-50/20 p-4 transition-all hover:shadow-md hover:border-orange-300"
+                    className="group relative overflow-hidden rounded-lg border border-orange-200/60 bg-gradient-to-br from-white to-orange-50/40 p-4 transition-all hover:shadow-md hover:border-orange-300"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-red-500 text-white font-bold">
-                          {idx + 1}
-                        </div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-start gap-3">
                         <div>
-                          <h4 className="font-semibold text-forest">{item.course.name}</h4>
-                          <p className="mb-0 flex items-center gap-1 text-xs text-orange-700">
+                          <h4 className="font-semibold text-forest leading-tight">
+                            {item.course.name}
+                          </h4>
+                          <p className="mb-1 flex items-center gap-1 text-xs text-orange-700">
                             <AlertTriangle className="h-3 w-3" />
-                            Còn thiếu {item.requiredSessions - item.completedSessions} buổi
+                            Còn thiếu{" "}
+                            {item.requiredSessions -
+                              item.completedSessions}{" "}
+                            buổi
                           </p>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <span className="inline-flex items-center rounded-full bg-red-100 px-2.5 py-1 text-xs font-bold uppercase text-red-700">
-                          Bắt buộc
+                      <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-[11px] font-semibold uppercase text-red-700 shadow-[0_1px_0_rgba(0,0,0,0.05)]">
+                        Bắt buộc
+                      </span>
+                    </div>
+                    <div className="mt-3 space-y-1">
+                      <div className="flex justify-between text-xs text-gray-600">
+                        <span>Hoàn thành</span>
+                        <span className="font-semibold text-forest">
+                          {Math.round(
+                            (item.completedSessions /
+                              Math.max(item.requiredSessions, 1)) *
+                              100
+                          )}
+                          %
                         </span>
-                        <div className="mt-1 h-1.5 w-16 rounded-full bg-gray-200">
-                          <div
-                            className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-400"
-                            style={{width: `${(item.completedSessions / item.requiredSessions) * 100}%`}}
-                          />
-                        </div>
+                      </div>
+                      <div className="h-1.5 w-full rounded-full bg-gray-200">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-500"
+                          style={{
+                            width: `${Math.min(
+                              (item.completedSessions /
+                                Math.max(item.requiredSessions, 1)) *
+                                100,
+                              100
+                            )}%`,
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -209,7 +296,9 @@ function SoldierDashboardPage() {
                 <div className="rounded-lg bg-gradient-to-br from-green-500 to-green-600 p-2">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
-                <h2 className="text-lg font-bold text-forest">Kết Quả Gần Đây</h2>
+                <h2 className="text-lg font-bold text-forest">
+                  Kết Quả Gần Đây
+                </h2>
               </div>
               <button className="flex items-center gap-1 text-sm font-medium text-olive hover:text-forest transition-colors">
                 Xem tất cả
@@ -230,7 +319,9 @@ function SoldierDashboardPage() {
           >
             <div className="space-y-3">
               <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
-                <h4 className="mb-2 text-sm font-semibold text-sand">Quy định huấn luyện</h4>
+                <h4 className="mb-2 text-sm font-semibold text-sand">
+                  Quy định huấn luyện
+                </h4>
                 <ul className="m-0 space-y-2 text-xs text-sand/90">
                   <li className="flex items-start gap-2">
                     <Clock className="mt-0.5 h-3 w-3 text-orange" />
@@ -248,15 +339,26 @@ function SoldierDashboardPage() {
               </div>
 
               <div className="rounded-lg bg-sand/10 p-3 backdrop-blur-sm">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-sand/80">Mục tiêu tuần này</p>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-sand/80">
+                  Mục tiêu tuần này
+                </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-sand">Hoàn thành</span>
-                  <span className="text-lg font-bold text-orange">{Math.min(3, upcoming.length)}/{upcoming.length}</span>
+                  <span className="text-sm font-medium text-sand">
+                    Hoàn thành
+                  </span>
+                  <span className="text-lg font-bold text-orange">
+                    {Math.min(3, upcoming.length)}/{upcoming.length}
+                  </span>
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-white/20">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-orange to-yellow-400"
-                    style={{width: `${Math.min(100, (3 / Math.max(upcoming.length, 1)) * 100)}%`}}
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        (3 / Math.max(upcoming.length, 1)) * 100
+                      )}%`,
+                    }}
                   />
                 </div>
               </div>
@@ -269,7 +371,9 @@ function SoldierDashboardPage() {
           title={
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-forest" />
-              <span className="font-bold text-forest">Bảng Tổng Kết Khóa Huấn Luyện</span>
+              <span className="font-bold text-forest">
+                Bảng Tổng Kết Khóa Huấn Luyện
+              </span>
             </div>
           }
           extra={
@@ -279,51 +383,76 @@ function SoldierDashboardPage() {
             </span>
           }
         >
-          <div className="overflow-x-auto">
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">Khóa huấn luyện</th>
-                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">Yêu cầu</th>
-                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">Hoàn thành</th>
-                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">Tiến độ</th>
-                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">Trạng thái</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Khóa huấn luyện
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Yêu cầu
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Hoàn thành
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Tiến độ
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Trạng thái
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {summary.map((item) => {
-                  const status = item.completedSessions >= item.requiredSessions;
-                  const progress = (item.completedSessions / item.requiredSessions) * 100;
+                  const status =
+                    item.completedSessions >= item.requiredSessions;
+                  const progress =
+                    (item.completedSessions / item.requiredSessions) * 100;
                   return (
-                    <tr key={item.course.id} className="hover:bg-gray-50 transition-colors">
+                    <tr
+                      key={item.course.id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
                       <td className="px-4 py-4">
                         <div>
-                          <div className="font-semibold text-forest">{item.course.name}</div>
-                          <p className="mb-0 text-xs text-gray-500">{item.course.description}</p>
+                          <div className="font-semibold text-forest">
+                            {item.course.name}
+                          </div>
+                          <p className="mb-0 text-xs text-gray-500">
+                            {item.course.description}
+                          </p>
                         </div>
                       </td>
                       <td className="px-4 py-4 text-center">
-                        <span className="font-semibold text-gray-700">{item.requiredSessions}</span>
+                        <span className="font-semibold text-gray-700">
+                          {item.requiredSessions}
+                        </span>
                       </td>
                       <td className="px-4 py-4 text-center">
-                        <span className="font-semibold text-gray-700">{item.completedSessions}</span>
+                        <span className="font-semibold text-gray-700">
+                          {item.completedSessions}
+                        </span>
                       </td>
                       <td className="px-4 py-4">
                         <div className="w-full">
                           <div className="mb-1 flex justify-between text-xs">
                             <span className="text-gray-600">Tiến độ</span>
-                            <span className="font-semibold text-gray-700">{Math.round(progress)}%</span>
+                            <span className="font-semibold text-gray-700">
+                              {Math.round(progress)}%
+                            </span>
                           </div>
                           <div className="h-2 w-full rounded-full bg-gray-200">
                             <div
                               className={`h-full rounded-full transition-all ${
                                 status
-                                  ? 'bg-gradient-to-r from-green-400 to-green-600'
+                                  ? "bg-gradient-to-r from-green-400 to-green-600"
                                   : progress > 50
-                                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500'
-                                  : 'bg-gradient-to-r from-orange-400 to-red-500'
+                                  ? "bg-gradient-to-r from-yellow-400 to-orange-500"
+                                  : "bg-gradient-to-r from-orange-400 to-red-500"
                               }`}
-                              style={{width: `${Math.min(progress, 100)}%`}}
+                              style={{ width: `${Math.min(progress, 100)}%` }}
                             />
                           </div>
                         </div>
@@ -346,6 +475,71 @@ function SoldierDashboardPage() {
                 })}
               </tbody>
             </table>
+          </div>
+
+          <div className="sm:hidden space-y-3">
+            {summary.map((item) => {
+              const status = item.completedSessions >= item.requiredSessions;
+              const progress =
+                (item.completedSessions / item.requiredSessions) * 100;
+              return (
+                <div
+                  key={item.course.id}
+                  className="rounded-xl border border-gray-200 bg-white p-3 shadow-sm"
+                >
+                  <div className="mb-2 flex items-start justify-between gap-2">
+                    <div>
+                      <p className="text-sm font-semibold text-forest">
+                        {item.course.name}
+                      </p>
+                      <p className="mb-1 text-xs text-gray-500">
+                        {item.course.description}
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-forest/10 px-2.5 py-1 text-[11px] font-semibold text-forest">
+                      <Shield className="h-3 w-3" />
+                      {status ? "Đạt" : "Đang học"}
+                    </span>
+                  </div>
+
+                  <div className="mb-3 flex justify-between text-xs text-gray-600">
+                    <span>
+                      Yêu cầu:{" "}
+                      <strong className="text-gray-800">
+                        {item.requiredSessions}
+                      </strong>
+                    </span>
+                    <span>
+                      Hoàn thành:{" "}
+                      <strong className="text-gray-800">
+                        {item.completedSessions}
+                      </strong>
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-600">Tiến độ</span>
+                      <span className="font-semibold text-gray-800">
+                        {Math.round(progress)}%
+                      </span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-gray-200">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          status
+                            ? "bg-gradient-to-r from-green-400 to-green-600"
+                            : progress > 50
+                            ? "bg-gradient-to-r from-yellow-400 to-orange-500"
+                            : "bg-gradient-to-r from-orange-400 to-red-500"
+                        }`}
+                        style={{ width: `${Math.min(progress, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </Card>
       </div>

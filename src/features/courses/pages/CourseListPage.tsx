@@ -105,9 +105,7 @@ function CourseListPage() {
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-col gap-3">
               <div className="flex items-start justify-center sm:justify-start gap-3">
-                <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
-                  <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
-                </div>
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                   Quản Lý Đào Tạo
                 </p>

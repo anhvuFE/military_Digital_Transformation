@@ -114,9 +114,7 @@ function SessionListPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-col gap-3">
                 <div className="flex items-start justify-center sm:justify-start gap-3">
-                  <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
-                    <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
-                  </div>
+                  <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                     Trung tâm Lập Kế Hoạch
                   </p>

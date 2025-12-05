@@ -16,7 +16,7 @@ function Card({ title, extra, className, children }: PropsWithChildren<Props>) {
           {extra}
         </div>
       )}
-      {children}
+      <div className="w-full">{children}</div>
     </div>
   );
 }

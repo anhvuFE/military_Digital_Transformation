@@ -47,76 +47,73 @@ function PersonalResultsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
+      <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
         {/* Header */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-5 sm:p-7 md:p-8 text-sand shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
-          <div className="relative">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-                  <Trophy className="h-8 w-8 text-sand" />
-                </div>
-                <div>
-                  <p className="mb-1 flex items-start gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                    <span className="h-1 w-8 rounded-full bg-orange mt-1" />
-                    Thành tích cá nhân
-                  </p>
-                  <h1 className="mb-2 text-3xl font-bold text-sand">Kết Quả & Thành Tích</h1>
-                  <p className="text-sm font-medium text-sand/90">Theo dõi chi tiết kết quả huấn luyện và các thành tích đạt được</p>
-                </div>
+          <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-col gap-2 sm:gap-3 items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-3">
+                <Trophy className="h-8 w-8 text-sand" />
+                <p className="m-0 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
+                  Thành tích cá nhân
+                </p>
               </div>
-              <div className="flex gap-2">
-                <button className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-sand backdrop-blur-sm hover:bg-white/20 transition-colors">
-                  <FileText className="inline-block mr-2 h-4 w-4" />
-                  Xuất báo cáo
-                </button>
-                <button className="rounded-lg bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-orange/90 transition-colors">
-                  <Download className="inline-block mr-2 h-4 w-4" />
-                  Tải chứng chỉ
-                </button>
+              <div className="space-y-1">
+                <h1 className="m-0 text-2xl sm:text-3xl font-bold text-sand">Kết Quả & Thành Tích</h1>
+                <p className="m-0 text-sm font-medium text-sand/90">Theo dõi chi tiết kết quả huấn luyện và các thành tích đạt được</p>
               </div>
             </div>
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+              <button className="w-full sm:w-auto rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-sand hover:bg-white/20 transition-colors">
+                <FileText className="inline-block mr-2 h-4 w-4" />
+                Xuất báo cáo
+              </button>
+              <button className="w-full sm:w-auto rounded-lg bg-orange px-4 py-2 text-sm font-medium text-white hover:bg-orange/90 transition-colors">
+                <Download className="inline-block mr-2 h-4 w-4" />
+                Tải chứng chỉ
+              </button>
+            </div>
+          </div>
 
-            {/* Quick Stats in Header */}
-            <div className="mt-6 grid gap-4 sm:grid-cols-4">
-              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-sand/70">Hoàn thành</p>
-                    <p className="text-xl font-bold text-sand">{stats.totalCompleted}</p>
-                  </div>
-                  <CheckCircle className="h-5 w-5 text-green-400" />
+          {/* Quick Stats in Header */}
+          <div className="mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-lg bg-white/10 p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-sand/70">Hoàn thành</p>
+                  <p className="text-xl font-bold text-sand">{stats.totalCompleted}</p>
                 </div>
+                <CheckCircle className="h-5 w-5 text-green-400" />
               </div>
-              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-sand/70">Đạt chuẩn</p>
-                    <p className="text-xl font-bold text-sand">{stats.totalPassed}</p>
-                  </div>
-                  <Award className="h-5 w-5 text-yellow-400" />
+            </div>
+            <div className="rounded-lg bg-white/10 p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-sand/70">Đạt chuẩn</p>
+                  <p className="text-xl font-bold text-sand">{stats.totalPassed}</p>
                 </div>
+                <Award className="h-5 w-5 text-yellow-400" />
               </div>
-              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-sand/70">Điểm TB</p>
-                    <p className="text-xl font-bold text-sand">{stats.avgScore}</p>
-                  </div>
-                  <TrendingUp className="h-5 w-5 text-blue-400" />
+            </div>
+            <div className="rounded-lg bg-white/10 p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-sand/70">Điểm TB</p>
+                  <p className="text-xl font-bold text-sand">{stats.avgScore}</p>
                 </div>
+                <TrendingUp className="h-5 w-5 text-blue-400" />
               </div>
-              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-sand/70">Khóa học</p>
-                    <p className="text-xl font-bold text-sand">{stats.coursesCompleted}/{stats.totalCourses}</p>
-                  </div>
-                  <Target className="h-5 w-5 text-orange" />
+            </div>
+            <div className="rounded-lg bg-white/10 p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-sand/70">Khóa học</p>
+                  <p className="text-xl font-bold text-sand">{stats.coursesCompleted}/{stats.totalCourses}</p>
                 </div>
+                <Target className="h-5 w-5 text-orange" />
               </div>
             </div>
           </div>

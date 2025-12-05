@@ -29,7 +29,7 @@ function CommendationPage() {
             <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-xl bg-gradient-to-br from-yellow-400/30 to-orange/30 p-3 backdrop-blur-sm">
+                  <div className="p-0">
                     <Trophy className="h-8 w-8 text-sand" />
                   </div>
                   <p className="m-0 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
@@ -209,7 +209,7 @@ function CommendationPage() {
             <div className="space-y-3">
               {upcoming.map((item) => (
                 <div
-                  key={item.title}
+                    key={item.title}
                   className="group relative overflow-hidden rounded-lg border border-gray-200 bg-gradient-to-r from-white to-gray-50 p-4 transition-all hover:shadow-md hover:border-forest/30"
                 >
                   <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
@@ -217,8 +217,8 @@ function CommendationPage() {
                     Sắp tới
                   </span>
                   <div className="flex gap-3 pr-16">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-100 to-yellow-200">
-                      <Trophy className="h-6 w-6 text-yellow-600" />
+                    <div className="flex h-12 w-12 items-center justify-center text-yellow-600">
+                      <Trophy className="h-6 w-6" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-forest">{item.title}</h4>

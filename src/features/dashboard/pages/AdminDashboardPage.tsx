@@ -78,17 +78,16 @@ function AdminDashboardPage() {
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-              <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+            <div className="flex flex-col gap-2 sm:gap-3 items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-3">
                 <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
-              </div>
-              <div className="flex-1">
-                <p className="mb-1 flex items-center sm:items-start gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
-                  <span className="h-1 w-6 sm:w-8 rounded-full bg-orange mt-0.5 sm:mt-1 flex-shrink-0" />
+                <p className="m-0 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
                   Trung tâm Chỉ huy
                 </p>
-                <h1 className="mb-1 sm:mb-2 text-lg sm:text-2xl md:text-3xl font-bold text-sand">Bảng Điều Khiển Chiến Lược</h1>
-                <p className="text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Hệ thống giám sát huấn luyện và chuyển đổi số quân đội</p>
+              </div>
+              <div className="space-y-1">
+                <h1 className="m-0 text-lg sm:text-2xl md:text-3xl font-bold text-sand">Bảng Điều Khiển Chiến Lược</h1>
+                <p className="m-0 text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Hệ thống giám sát huấn luyện và chuyển đổi số quân đội</p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -185,20 +184,22 @@ function AdminDashboardPage() {
         </div>
 
         <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr,0.7fr]">
-          <div className="rounded-xl border border-border bg-white p-4 sm:p-6 shadow-lg">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-start gap-3">
-                <div className="rounded-lg bg-gradient-to-br from-forest to-olive p-2">
-                  <Calendar className="h-5 w-5 text-white mt-0.5" />
-                </div>
-                <h2 className="text-lg font-bold text-forest">Lịch Huấn Luyện Sắp Tới</h2>
-              </div>
-              <Button variant="ghost" className="text-olive hover:text-forest" onClick={() => navigate("/sessions")}>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 px-1 sm:px-0">
+              <Calendar className="h-5 w-5 text-forest mt-0.5" />
+              <h2 className="text-lg font-bold text-forest">Lịch Huấn Luyện Sắp Tới</h2>
+            </div>
+            <UpcomingSessionsWidget sessions={upcoming} />
+            <div className="mt-4">
+              <Button
+                variant="secondary"
+                className="w-full justify-center text-olive border-forest/20 hover:border-forest/40 hover:text-forest"
+                onClick={() => navigate("/sessions")}
+              >
                 Xem tất cả
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
-            <UpcomingSessionsWidget sessions={upcoming} />
           </div>
 
           <div className="space-y-4">

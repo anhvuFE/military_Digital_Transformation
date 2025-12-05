@@ -75,9 +75,7 @@ function ReportPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-center sm:justify-start gap-3">
-                  <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
-                    <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
-                  </div>
+                  <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                     Trung tâm Phân tích
                   </p>
@@ -105,19 +103,19 @@ function ReportPage() {
             </div>
 
             <div className="mt-4 sm:mt-6 grid gap-2 sm:gap-3 md:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 transition-all hover:bg-white/20">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Tổng buổi</p>
                       <p className="text-xl sm:text-2xl font-bold text-sand mt-1">{totals.totalSessions}</p>
                     </div>
-                    <div className="rounded-lg bg-white/20 p-1 sm:p-1.5">
+                    <div className="rounded-lg bg-white/10 p-1 sm:p-1.5">
                       <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <div className="h-1 w-full rounded-full bg-white/20">
+                    <div className="h-1 w-full rounded-full bg-white/10">
                       <div className="h-full w-full rounded-full bg-gradient-to-r from-orange to-yellow-400" />
                     </div>
                     <p className="text-[8px] sm:text-[10px] text-sand/60 mt-1">Đã lên lịch</p>
@@ -125,19 +123,19 @@ function ReportPage() {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 transition-all hover:bg-white/20">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Hoàn thành TB</p>
                       <p className="text-xl sm:text-2xl font-bold text-sand mt-1">{totals.avgCompletion}%</p>
                     </div>
-                    <div className="rounded-lg bg-white/20 p-1 sm:p-1.5">
+                    <div className="rounded-lg bg-white/10 p-1 sm:p-1.5">
                       <TrendingUp className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-400" />
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <div className="h-1 w-full rounded-full bg-white/20">
+                    <div className="h-1 w-full rounded-full bg-white/10">
                       <div className="h-full rounded-full bg-gradient-to-r from-green-400 to-green-600" style={{width: `${totals.avgCompletion}%`}} />
                     </div>
                     <p className="text-[8px] sm:text-[10px] text-sand/60 mt-1">Tỷ lệ trung bình</p>
@@ -145,19 +143,19 @@ function ReportPage() {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 transition-all hover:bg-white/20">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Chưa đủ</p>
                       <p className="text-xl sm:text-2xl font-bold text-sand mt-1">{totals.pending}</p>
                     </div>
-                    <div className="rounded-lg bg-white/20 p-1 sm:p-1.5">
+                    <div className="rounded-lg bg-white/10 p-1 sm:p-1.5">
                       <AlertTriangle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-orange" />
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <div className="h-1 w-full rounded-full bg-white/20">
+                    <div className="h-1 w-full rounded-full bg-white/10">
                       <div className="h-full w-[30%] rounded-full bg-gradient-to-r from-orange to-red-400" />
                     </div>
                     <p className="text-[8px] sm:text-[10px] text-sand/60 mt-1">Quân nhân cần bổ sung</p>
@@ -165,19 +163,19 @@ function ReportPage() {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-2.5 sm:p-3 md:p-4 transition-all hover:bg-white/20">
                 <div className="flex flex-col h-full">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <p className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Đơn vị</p>
                       <p className="text-xl sm:text-2xl font-bold text-sand mt-1">{rows.length}</p>
                     </div>
-                    <div className="rounded-lg bg-white/20 p-1 sm:p-1.5">
+                    <div className="rounded-lg bg-white/10 p-1 sm:p-1.5">
                       <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </div>
                   </div>
                   <div className="mt-auto">
-                    <div className="h-1 w-full rounded-full bg-white/20">
+                    <div className="h-1 w-full rounded-full bg-white/10">
                       <div className="h-full w-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
                     </div>
                     <p className="text-[8px] sm:text-[10px] text-sand/60 mt-1">Đang theo dõi</p>

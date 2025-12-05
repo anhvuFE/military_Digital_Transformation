@@ -30,15 +30,24 @@
     @apply text-inherit no-underline;
   }
 
-  h1,
-  h2,
-  h3,
+  h1 {
+    @apply mb-3 text-3xl sm:text-4xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply mb-3 text-2xl sm:text-3xl font-bold leading-snug;
+  }
+
+  h3 {
+    @apply mb-3 text-xl sm:text-2xl font-bold leading-snug;
+  }
+
   h4 {
-    @apply font-bold mb-3;
+    @apply mb-3 text-lg sm:text-xl font-bold leading-snug;
   }
 
   p {
-    @apply mb-3 text-moss;
+    @apply mb-3 text-base leading-relaxed text-moss;
   }
 
   table {

@@ -93,44 +93,33 @@ function SessionTable({ sessions, courses, units, enrollmentsBySession = {}, onE
                   )}
 
                   <div className="grid gap-3 sm:grid-cols-3">
-                    <div className="flex items-start gap-2">
-                      <div className="rounded-lg bg-forest/10 p-2">
-                        <Clock className="h-4 w-4 text-forest" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Thời gian</p>
-                        <p className="text-sm font-medium text-gray-800">
-                          {start.toLocaleString("vi-VN", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric"
-                          })}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          đến {end.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
-                        </p>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Thời gian</p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center gap-1 rounded-full border border-forest/20 bg-forest/5 px-3 py-1 text-sm font-semibold text-forest">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {start.toLocaleDateString("vi-VN")}
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-semibold text-gray-800">
+                          <Clock className="h-3.5 w-3.5 text-forest" />
+                          {start.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })} - {end.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
+                        </span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <div className="rounded-lg bg-orange/10 p-2">
-                        <MapPin className="h-4 w-4 text-orange" />
-                      </div>
+                      <MapPin className="h-4 w-4 text-orange mt-0.5" />
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Địa điểm</p>
-                        <p className="text-sm font-medium text-gray-800">{session.location}</p>
+                        <p className="text-base font-medium text-gray-800">{session.location}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2">
-                      <div className="rounded-lg bg-blue-100 p-2">
-                        <User className="h-4 w-4 text-blue-600" />
-                      </div>
+                      <User className="h-4 w-4 text-blue-600 mt-0.5" />
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Giảng viên</p>
-                        <p className="text-sm font-medium text-gray-800">{session.instructor}</p>
+                        <p className="text-base font-medium text-gray-800">{session.instructor}</p>
                       </div>
                     </div>
                   </div>
@@ -210,22 +199,17 @@ function SessionTable({ sessions, courses, units, enrollmentsBySession = {}, onE
 
                 {/* Session Details */}
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                      Thời gian
-                    </span>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-gray-800">
-                        {start.toLocaleString("vi-VN", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          day: "2-digit",
-                          month: "2-digit"
-                        })}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        đến {end.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
-                      </p>
+                  <div className="space-y-1">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Thời gian</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-forest/20 bg-forest/5 px-2.5 py-1 text-xs font-semibold text-forest">
+                        <Calendar className="h-3 w-3" />
+                        {start.toLocaleDateString("vi-VN")}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-semibold text-gray-800">
+                        <Clock className="h-3 w-3 text-forest" />
+                        {start.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })} - {end.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
+                      </span>
                     </div>
                   </div>
 

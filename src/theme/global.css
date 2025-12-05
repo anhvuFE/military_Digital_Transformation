@@ -47,11 +47,11 @@
 
   th,
   td {
-    @apply px-3 py-2.5 border-b border-border text-left align-top;
+    @apply px-2 sm:px-3 py-2 sm:py-2.5 border-b border-border text-left align-top text-xs sm:text-sm;
   }
 
   thead th {
-    @apply text-xs uppercase tracking-[0.12em] text-muted bg-sand/60;
+    @apply text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.12em] text-muted bg-sand/60;
   }
 
   tbody tr:hover {
@@ -88,16 +88,16 @@
 
 @layer components {
   .app-shell {
-    @apply grid min-h-screen grid-cols-1 md:grid-cols-[240px_1fr];
+    @apply grid min-h-screen grid-cols-1 lg:grid-cols-[240px_1fr];
   }
 
   .page {
-    @apply w-full max-w-[1280px] px-4 py-5 md:px-7;
+    @apply w-full max-w-[1280px] px-4 py-5 sm:px-5 md:px-6 lg:px-7;
     margin: 0 auto;
   }
 
   .card {
-    @apply rounded-xl border border-border bg-white p-5 shadow-sm;
+    @apply rounded-xl border border-border bg-white p-3 sm:p-4 md:p-5 shadow-sm;
   }
 
   .card-tonal {
@@ -107,7 +107,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center gap-2 rounded-lg border border-transparent bg-forest px-4 py-2.5 font-semibold uppercase tracking-wide text-sand transition duration-150 ease-in-out shadow-sm;
+    @apply inline-flex items-center gap-2 rounded-lg border border-transparent bg-forest px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base font-semibold uppercase tracking-wide text-sand transition duration-150 ease-in-out shadow-sm;
   }
 
   .btn:hover {
@@ -135,7 +135,11 @@
   }
 
   .sidebar {
-    @apply flex min-h-screen flex-col gap-3 bg-gradient-to-b from-forest via-olive to-[#0c120c] px-4 py-5 text-sand shadow-card-strong;
+    @apply fixed lg:relative lg:flex min-h-screen w-[280px] lg:w-auto flex-col gap-3 bg-gradient-to-b from-forest via-olive to-[#0c120c] px-4 py-5 text-sand shadow-card-strong transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-30;
+  }
+
+  .sidebar.open {
+    @apply translate-x-0;
   }
 
   .sidebar .brand {
@@ -151,7 +155,7 @@
   }
 
   .topbar {
-    @apply sticky top-0 z-10 flex items-center justify-between border-b border-border bg-white px-5 py-3;
+    @apply sticky top-0 z-20 flex items-center justify-between border-b border-border bg-white px-4 sm:px-5 py-3;
   }
 
   .pill {
@@ -171,11 +175,11 @@
   }
 
   .toast-container {
-    @apply fixed bottom-4 right-4 z-40 flex flex-col gap-2.5;
+    @apply fixed bottom-4 right-2 sm:right-4 z-40 flex flex-col gap-2.5 max-w-[calc(100%-1rem)] sm:max-w-none;
   }
 
   .toast {
-    @apply min-w-[220px] rounded-xl px-3.5 py-3 text-white shadow-xl;
+    @apply min-w-[200px] sm:min-w-[220px] rounded-xl px-3 sm:px-3.5 py-2.5 sm:py-3 text-sm sm:text-base text-white shadow-xl;
   }
 
   .toast.success {
@@ -191,15 +195,23 @@
   }
 
   .modal-backdrop {
-    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/45;
+    @apply fixed inset-0 z-50 bg-black/45 overflow-y-auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
   }
 
   .modal {
-    @apply w-full max-w-[800px] rounded-2xl bg-white p-5 shadow-2xl;
+    @apply w-[95%] sm:w-[90%] md:w-full max-w-[800px] rounded-2xl bg-white p-4 sm:p-5 shadow-2xl;
+    margin: 20px auto;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    position: relative;
   }
 
   .modal-wide {
-    @apply max-w-[900px];
+    @apply max-w-[95%] lg:max-w-[900px];
   }
 
   .login-page {
@@ -212,7 +224,7 @@
   }
 
   .login-card {
-    @apply w-full rounded-2xl border border-border/70 bg-forest p-7 shadow-card-strong text-sand;
+    @apply w-full max-w-[95%] sm:max-w-md rounded-2xl border border-border/70 bg-forest p-5 sm:p-6 md:p-7 shadow-card-strong text-sand;
     backdrop-filter: blur(6px);
   }
 
@@ -221,7 +233,7 @@
   }
 
   .timeline-item {
-    @apply grid grid-cols-[120px,1fr] items-center gap-3;
+    @apply grid grid-cols-1 sm:grid-cols-[120px,1fr] items-start sm:items-center gap-2 sm:gap-3;
   }
 
   /* Fallback utility for stronger shadow (avoids Tailwind apply warning) */

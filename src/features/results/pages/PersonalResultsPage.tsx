@@ -60,8 +60,8 @@ function PersonalResultsPage() {
                   <Trophy className="h-8 w-8 text-sand" />
                 </div>
                 <div>
-                  <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                    <span className="h-1 w-8 rounded-full bg-orange" />
+                  <p className="mb-1 flex items-start gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
+                    <span className="h-1 w-8 rounded-full bg-orange mt-1" />
                     Thành tích cá nhân
                   </p>
                   <h1 className="mb-2 text-3xl font-bold text-sand">Kết Quả & Thành Tích</h1>
@@ -177,8 +177,8 @@ function PersonalResultsPage() {
           <Card
             className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0"
             title={
-              <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-sand" />
+              <div className="flex items-start gap-2">
+                <Star className="h-5 w-5 text-sand mt-0.5" />
                 <span className="font-bold text-sand">Thành Tích Xuất Sắc Gần Đây</span>
               </div>
             }
@@ -216,14 +216,14 @@ function PersonalResultsPage() {
             className="border-2 border-border shadow-lg"
             title={
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-forest" />
+                <div className="flex items-start gap-2">
+                  <Clock className="h-5 w-5 text-forest mt-0.5" />
                   <span className="font-bold text-forest">Timeline Kết Quả</span>
                 </div>
                 <Select
                   options={periodOptions}
                   value={filterPeriod}
-                  onChange={setFilterPeriod}
+                  onChange={(value) => setFilterPeriod(value || "all")}
                   placeholder="Lọc theo thời gian"
                 />
               </div>
@@ -236,8 +236,8 @@ function PersonalResultsPage() {
           <Card
             className="border-2 border-border shadow-lg"
             title={
-              <div className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-forest" />
+              <div className="flex items-start gap-2">
+                <Target className="h-5 w-5 text-forest mt-0.5" />
                 <span className="font-bold text-forest">Tổng Hợp Khóa Học</span>
               </div>
             }
@@ -250,8 +250,8 @@ function PersonalResultsPage() {
         <Card
           className="border-2 border-border shadow-lg"
           title={
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-forest" />
+            <div className="flex items-start gap-2">
+              <TrendingUp className="h-5 w-5 text-forest mt-0.5" />
               <span className="font-bold text-forest">Tiến Độ Theo Tháng</span>
             </div>
           }

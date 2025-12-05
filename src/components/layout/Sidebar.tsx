@@ -60,7 +60,7 @@ function Sidebar({ className }: { className?: string }) {
               <User className="h-5 w-5 text-orange" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-sand">{user.name}</p>
+              <p className="text-sm font-semibold text-sand">{user.fullName}</p>
               <p className="text-xs text-sand/70">
                 {user.role === "ADMIN" ? "Quản trị viên" : "Quân nhân"}
               </p>

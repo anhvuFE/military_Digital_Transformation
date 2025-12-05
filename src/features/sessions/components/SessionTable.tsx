@@ -26,84 +26,201 @@ function SessionTable({ sessions, courses, units, enrollmentsBySession = {}, onE
   }
 
   return (
-    <div className="grid gap-4">
-      {sessions.map((session) => {
-        const course = courses.find((c) => c.id === session.courseId);
-        const unit = units.find((u) => u.id === session.unitId);
-        const start = new Date(session.startTime);
-        const end = new Date(session.endTime);
-        const upcoming = start.getTime() > Date.now();
-        const enrollmentCount = enrollmentsBySession[session.id] ?? 0;
+    <>
+      {/* Desktop Table View */}
+      <div className="hidden sm:grid gap-4">
+        {sessions.map((session) => {
+          const course = courses.find((c) => c.id === session.courseId);
+          const unit = units.find((u) => u.id === session.unitId);
+          const start = new Date(session.startTime);
+          const end = new Date(session.endTime);
+          const upcoming = start.getTime() > Date.now();
+          const enrollmentCount = enrollmentsBySession[session.id] ?? 0;
 
-        const isPast = end.getTime() < Date.now();
-        const isOngoing = start.getTime() <= Date.now() && end.getTime() >= Date.now();
+          const isPast = end.getTime() < Date.now();
+          const isOngoing = start.getTime() <= Date.now() && end.getTime() >= Date.now();
 
-        return (
-          <div
-            key={session.id}
-            className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-md transition-all hover:border-forest/30 hover:shadow-xl hover:-translate-y-1"
-          >
-            <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-forest via-olive to-moss" />
+          return (
+            <div
+              key={session.id}
+              className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-md transition-all hover:border-forest/30 hover:shadow-xl hover:-translate-y-1"
+            >
+              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-forest via-olive to-moss" />
 
-            <div className="flex flex-col lg:flex-row lg:items-center gap-4 p-5">
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <h3 className="text-lg font-bold text-gray-800 group-hover:text-forest transition-colors">
-                    {session.title || course?.name || "Buổi huấn luyện"}
-                  </h3>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4 p-5">
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-forest transition-colors">
+                      {session.title || course?.name || "Buổi huấn luyện"}
+                    </h3>
 
-                  {isOngoing && (
-                    <span className="inline-flex items-center gap-1 animate-pulse rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">
-                      <div className="h-2 w-2 rounded-full bg-green-600 animate-pulse" />
-                      Đang diễn ra
+                    {isOngoing && (
+                      <span className="inline-flex items-center gap-1 animate-pulse rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">
+                        <div className="h-2 w-2 rounded-full bg-green-600 animate-pulse" />
+                        Đang diễn ra
+                      </span>
+                    )}
+                    {upcoming && !isOngoing && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-700">
+                        <Timer className="h-3 w-3" />
+                        Sắp diễn ra
+                      </span>
+                    )}
+                    {isPast && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
+                        <CheckCircle2 className="h-3 w-3" />
+                        Đã diễn ra
+                      </span>
+                    )}
+
+                    <span className="inline-flex items-center gap-1 rounded-full bg-forest/10 px-2.5 py-1 text-xs font-semibold text-forest">
+                      <Target className="h-3 w-3" />
+                      {unit?.name || "Đơn vị"}
                     </span>
+
+                    {enrollmentCount > 0 && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
+                        <Users className="h-3 w-3" />
+                        {enrollmentCount} quân nhân
+                      </span>
+                    )}
+                  </div>
+
+                  {course?.name && (
+                    <p className="mb-3 text-sm text-gray-600 font-medium">
+                      Khóa học: {course.name}
+                    </p>
                   )}
-                  {upcoming && !isOngoing && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-700">
-                      <Timer className="h-3 w-3" />
-                      Sắp diễn ra
-                    </span>
-                  )}
-                  {isPast && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-600">
-                      <CheckCircle2 className="h-3 w-3" />
-                      Đã diễn ra
-                    </span>
-                  )}
 
-                  <span className="inline-flex items-center gap-1 rounded-full bg-forest/10 px-2.5 py-1 text-xs font-semibold text-forest">
-                    <Target className="h-3 w-3" />
-                    {unit?.name || "Đơn vị"}
-                  </span>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="flex items-start gap-2">
+                      <div className="rounded-lg bg-forest/10 p-2">
+                        <Clock className="h-4 w-4 text-forest" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Thời gian</p>
+                        <p className="text-sm font-medium text-gray-800">
+                          {start.toLocaleString("vi-VN", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric"
+                          })}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          đến {end.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
+                        </p>
+                      </div>
+                    </div>
 
-                  {enrollmentCount > 0 && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                      <Users className="h-3 w-3" />
-                      {enrollmentCount} quân nhân
-                    </span>
+                    <div className="flex items-start gap-2">
+                      <div className="rounded-lg bg-orange/10 p-2">
+                        <MapPin className="h-4 w-4 text-orange" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Địa điểm</p>
+                        <p className="text-sm font-medium text-gray-800">{session.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2">
+                      <div className="rounded-lg bg-blue-100 p-2">
+                        <User className="h-4 w-4 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Giảng viên</p>
+                        <p className="text-sm font-medium text-gray-800">{session.instructor}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
+                  <button
+                    onClick={() => onEdit(session)}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition-all hover:border-forest hover:bg-forest hover:text-white"
+                  >
+                    <Edit2 className="h-4 w-4" />
+                    <span>SỬA</span>
+                  </button>
+                  <button
+                    onClick={() => onResult(session)}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest bg-forest px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-forest/90"
+                  >
+                    <FileText className="h-4 w-4" />
+                    <span>NHẬP KẾT QUẢ</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="sm:hidden space-y-4">
+        {sessions.map((session) => {
+          const course = courses.find((c) => c.id === session.courseId);
+          const unit = units.find((u) => u.id === session.unitId);
+          const start = new Date(session.startTime);
+          const end = new Date(session.endTime);
+          const upcoming = start.getTime() > Date.now();
+          const enrollmentCount = enrollmentsBySession[session.id] ?? 0;
+
+          const isPast = end.getTime() < Date.now();
+          const isOngoing = start.getTime() <= Date.now() && end.getTime() >= Date.now();
+
+          return (
+            <div key={session.id} className="card p-4 shadow-sm hover:shadow-md transition-all">
+              <div className="space-y-3">
+                {/* Session Header */}
+                <div className="space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-bold text-gray-800 text-sm leading-tight">
+                      {session.title || course?.name || "Buổi huấn luyện"}
+                    </h3>
+
+                    {isOngoing && (
+                      <span className="inline-flex items-center gap-1 animate-pulse rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
+                        <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
+                        Đang diễn ra
+                      </span>
+                    )}
+                    {upcoming && !isOngoing && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-2 py-1 text-xs font-semibold text-orange-700">
+                        <Timer className="h-3 w-3" />
+                        Sắp diễn ra
+                      </span>
+                    )}
+                    {isPast && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600">
+                        <CheckCircle2 className="h-3 w-3" />
+                        Đã hoàn thành
+                      </span>
+                    )}
+                  </div>
+
+                  {course?.name && (
+                    <p className="text-xs text-gray-600">
+                      Khóa học: <span className="font-medium">{course.name}</span>
+                    </p>
                   )}
                 </div>
 
-                {course?.name && (
-                  <p className="mb-3 text-sm text-gray-600 font-medium">
-                    Khóa học: {course.name}
-                  </p>
-                )}
-
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="flex items-start gap-2">
-                    <div className="rounded-lg bg-forest/10 p-2">
-                      <Clock className="h-4 w-4 text-forest" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Thời gian</p>
+                {/* Session Details */}
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      Thời gian
+                    </span>
+                    <div className="text-right">
                       <p className="text-sm font-medium text-gray-800">
                         {start.toLocaleString("vi-VN", {
                           hour: "2-digit",
                           minute: "2-digit",
                           day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric"
+                          month: "2-digit"
                         })}
                       </p>
                       <p className="text-xs text-gray-500">
@@ -112,49 +229,70 @@ function SessionTable({ sessions, courses, units, enrollmentsBySession = {}, onE
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="rounded-lg bg-orange/10 p-2">
-                      <MapPin className="h-4 w-4 text-orange" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Địa điểm</p>
-                      <p className="text-sm font-medium text-gray-800">{session.location}</p>
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      Địa điểm
+                    </span>
+                    <span className="text-sm font-medium text-gray-800 text-right">
+                      {session.location}
+                    </span>
                   </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="rounded-lg bg-blue-100 p-2">
-                      <User className="h-4 w-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">Giảng viên</p>
-                      <p className="text-sm font-medium text-gray-800">{session.instructor}</p>
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      Giảng viên
+                    </span>
+                    <span className="text-sm font-medium text-gray-800 text-right">
+                      {session.instructor}
+                    </span>
                   </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      Đơn vị
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-forest/10 px-2 py-1 text-xs font-semibold text-forest">
+                      <Target className="h-3 w-3" />
+                      {unit?.name || "Đơn vị"}
+                    </span>
+                  </div>
+
+                  {enrollmentCount > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        Tham gia
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-700">
+                        <Users className="h-3 w-3" />
+                        {enrollmentCount} quân nhân
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-2 pt-3 border-t border-gray-100">
+                  <button
+                    onClick={() => onEdit(session)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-gray-700 transition-all hover:border-forest hover:bg-forest hover:text-white"
+                  >
+                    <Edit2 className="h-4 w-4" />
+                    <span>SỬA</span>
+                  </button>
+                  <button
+                    onClick={() => onResult(session)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest bg-forest px-3 py-2 text-sm font-semibold text-white transition-all hover:bg-forest/90"
+                  >
+                    <FileText className="h-4 w-4" />
+                    <span>KẾT QUẢ</span>
+                  </button>
                 </div>
               </div>
-
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
-                <button
-                  onClick={() => onEdit(session)}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition-all hover:border-forest hover:bg-forest hover:text-white"
-                >
-                  <Edit2 className="h-4 w-4" />
-                  <span>SỬA</span>
-                </button>
-                <button
-                  onClick={() => onResult(session)}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest bg-forest px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-forest/90"
-                >
-                  <FileText className="h-4 w-4" />
-                  <span>NHẬP KẾT QUẢ</span>
-                </button>
-              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

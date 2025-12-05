@@ -31,44 +31,44 @@ function UserProfilePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
+      <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
         {/* Header */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 md:p-8 text-sand shadow-xl sm:shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative">
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
               {/* Avatar */}
               <div className="relative">
-                <div className="h-32 w-32 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <User className="h-16 w-16 text-sand" />
+                <div className="h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <User className="h-12 w-12 sm:h-16 sm:w-16 text-sand" />
                 </div>
-                <button className="absolute bottom-0 right-0 rounded-full bg-orange p-2 text-white shadow-lg hover:bg-orange/90 transition-colors">
-                  <Camera className="h-4 w-4" />
+                <button className="absolute bottom-0 right-0 rounded-full bg-orange p-1.5 sm:p-2 text-white shadow-lg hover:bg-orange/90 transition-colors">
+                  <Camera className="h-3 w-3 sm:h-4 sm:w-4" />
                 </button>
               </div>
 
               {/* Profile Info */}
-              <div className="flex-1">
-                <h1 className="text-3xl font-bold text-sand mb-2">{user?.name || "Quân nhân"}</h1>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-sm font-semibold text-sand backdrop-blur-sm">
-                    <Shield className="h-4 w-4" />
-                    SQ: {user?.serviceNumber}
+              <div className="flex-1 text-center sm:text-left">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-sand mb-2">{user?.fullName || "Quân nhân"}</h1>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 mb-3 sm:mb-4">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-sand backdrop-blur-sm">
+                    <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="truncate max-w-[100px] sm:max-w-none">SQ: {user?.serviceNumber}</span>
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-orange px-3 py-1 text-sm font-semibold text-white">
-                    <Star className="h-4 w-4" />
+                  <span className="inline-flex items-center gap-1 rounded-full bg-orange px-2.5 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-white">
+                    <Star className="h-3 w-3 sm:h-4 sm:w-4" />
                     {stats.rank}
                   </span>
                 </div>
-                <p className="text-sand/80 text-sm">
+                <p className="text-sand/80 text-xs sm:text-sm">
                   {stats.yearsOfService} năm phục vụ • Đơn vị: {user?.unit || "Đang cập nhật"}
                 </p>
               </div>
 
               {/* Edit Button */}
-              <div>
+              <div className="mt-4 sm:mt-0">
                 {!isEditing ? (
                   <Button
                     variant="secondary"
@@ -155,16 +155,16 @@ function UserProfilePage() {
           <Card
             className="border-2 border-border shadow-lg"
             title={
-              <div className="flex items-center gap-2">
-                <Briefcase className="h-5 w-5 text-forest" />
+              <div className="flex items-start gap-2">
+                <Briefcase className="h-5 w-5 text-forest mt-0.5" />
                 <span className="font-bold text-forest">Thông Tin Liên Hệ</span>
               </div>
             }
           >
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <div className="rounded-lg bg-gray-100 p-2">
-                  <Phone className="h-5 w-5 text-gray-600" />
+                  <Phone className="h-5 w-5 text-gray-600 mt-0.5" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Số điện thoại</p>
@@ -181,9 +181,9 @@ function UserProfilePage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <div className="rounded-lg bg-gray-100 p-2">
-                  <Mail className="h-5 w-5 text-gray-600" />
+                  <Mail className="h-5 w-5 text-gray-600 mt-0.5" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Email</p>
@@ -200,9 +200,9 @@ function UserProfilePage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <div className="rounded-lg bg-gray-100 p-2">
-                  <MapPin className="h-5 w-5 text-gray-600" />
+                  <MapPin className="h-5 w-5 text-gray-600 mt-0.5" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Địa chỉ đơn vị</p>
@@ -225,8 +225,8 @@ function UserProfilePage() {
           <Card
             className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0"
             title={
-              <div className="flex items-center gap-2">
-                <Medal className="h-5 w-5 text-sand" />
+              <div className="flex items-start gap-2">
+                <Medal className="h-5 w-5 text-sand mt-0.5" />
                 <span className="font-bold text-sand">Thành Tích Gần Đây</span>
               </div>
             }
@@ -263,8 +263,8 @@ function UserProfilePage() {
         <Card
           className="border-2 border-border shadow-lg"
           title={
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-forest" />
+            <div className="flex items-start gap-2">
+              <TrendingUp className="h-5 w-5 text-forest mt-0.5" />
               <span className="font-bold text-forest">Tiến Độ Huấn Luyện Theo Tháng</span>
             </div>
           }

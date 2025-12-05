@@ -129,28 +129,6 @@ function LoginForm() {
         )}
       </Button>
 
-      {/* Demo Account Info */}
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-sand/10" />
-        </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="px-3 bg-forest text-sand/60 font-medium">Tài khoản demo</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 text-center">
-        <div className="p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-sand/10 hover:bg-white/10 transition-colors cursor-pointer group"
-             onClick={() => { setServiceNumber('admin'); setPassword('123456'); }}>
-          <p className="text-sm font-semibold text-sand/90 group-hover:text-sand transition-colors">Admin</p>
-          <p className="text-sm text-sand/50 font-normal mt-0.5">admin / 123456</p>
-        </div>
-        <div className="p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-sand/10 hover:bg-white/10 transition-colors cursor-pointer group"
-             onClick={() => { setServiceNumber('soldier'); setPassword('123456'); }}>
-          <p className="text-sm font-semibold text-sand/90 group-hover:text-sand transition-colors">Quân nhân</p>
-          <p className="text-sm text-sand/50 font-normal mt-0.5">soldier / 123456</p>
-        </div>
-      </div>
     </form>
   );
 }

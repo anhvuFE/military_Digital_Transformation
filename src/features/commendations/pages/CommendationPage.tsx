@@ -1,7 +1,6 @@
 import Card from "@/components/common/Card";
-import Tag from "@/components/common/Tag";
 import Button from "@/components/common/Button";
-import { Award, Trophy, Medal, Star, Users, User, Calendar, MapPin, Shield, Zap, ChevronRight, Plus, Download, TrendingUp, Target, Flag, Heart, Brain, Sparkles, Crown, AlertCircle, Clock, CheckCircle } from "lucide-react";
+import { Award, Trophy, Medal, Star, Users, User, Calendar, MapPin, Shield, Zap, ChevronRight, Plus, Download, TrendingUp, Target, Flag, Heart, GraduationCap, Sparkles, Crown, AlertCircle, Clock, CheckCircle } from "lucide-react";
 
 const unitPlans = [
   { unit: "Đại đội 1", reason: "Hoàn thành 100% buổi huấn luyện tuần", date: "2024-04-10", level: "Đơn vị" },
@@ -21,36 +20,37 @@ const upcoming = [
 function CommendationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-yellow-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+      <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-5 sm:p-7 md:p-8 text-sand shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-yellow-400/20 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-gradient-to-br from-yellow-400/30 to-orange/30 p-3 backdrop-blur-sm">
-                  <Trophy className="h-8 w-8 text-sand" />
-                </div>
-                <div>
-                  <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                    <span className="h-1 w-8 rounded-full bg-yellow-400" />
+            <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-gradient-to-br from-yellow-400/30 to-orange/30 p-3 backdrop-blur-sm">
+                    <Trophy className="h-8 w-8 text-sand" />
+                  </div>
+                  <p className="m-0 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                     Trung tâm Vinh danh
                   </p>
-                  <h1 className="mb-2 text-3xl font-bold text-sand">Khen Thưởng & Tuyên Dương</h1>
-                  <p className="text-sm font-medium text-sand/90">Ghi nhận thành tích xuất sắc trong huấn luyện chiến đấu</p>
+                </div>
+                <div className="space-y-1">
+                  <h1 className="m-0 text-2xl sm:text-3xl font-bold text-sand">Khen Thưởng Tuyên Dương</h1>
+                  <p className="m-0 text-sm sm:text-base font-medium text-sand/90">Ghi nhận thành tích xuất sắc trong huấn luyện chiến đấu</p>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
                 <Button
                   variant="secondary"
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
+                  className="w-full sm:w-auto bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Tạo đề xuất
                 </Button>
                 <Button
-                  className="bg-forest text-sand hover:bg-olive border-0 shadow-md"
+                  className="w-full sm:w-auto bg-forest text-sand hover:bg-olive border-0 shadow-md"
                 >
                   <Download className="mr-2 h-4 w-4" />
                   Xuất quyết định
@@ -58,7 +58,7 @@ function CommendationPage() {
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br from-yellow-400/20 to-transparent p-4 backdrop-blur-sm transition-all hover:bg-white/20">
                 <div className="flex items-center justify-between">
                   <div>
@@ -116,11 +116,11 @@ function CommendationPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
           <Card className="border-2 border-yellow-200/50 bg-gradient-to-br from-white to-yellow-50/30 shadow-lg">
             <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Flag className="h-5 w-5 text-forest" />
+              <div className="flex items-start gap-2">
+                <Flag className="h-5 w-5 text-forest mt-0.5" />
                 <h3 className="font-bold text-forest">Đơn Vị Xuất Sắc</h3>
               </div>
               <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
@@ -134,26 +134,24 @@ function CommendationPage() {
                   key={item.unit}
                   className="group relative overflow-hidden rounded-lg border border-green-200/50 bg-gradient-to-r from-green-50/50 to-transparent p-4 transition-all hover:shadow-md hover:border-green-300"
                 >
-                  <div className="absolute top-2 right-2">
+                  <div className="absolute top-2 right-2 flex flex-col items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 text-white font-bold shadow-md">
                       <Crown className="h-4 w-4" />
                     </div>
+                    <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">
+                      Cấp đơn vị
+                    </span>
                   </div>
-                  <div className="pr-12">
-                    <div className="mb-2 flex items-center gap-2">
-                      <Shield className="h-4 w-4 text-forest" />
+                  <div className="pr-20">
+                    <div className="mb-2 flex items-start gap-2">
+                      <Shield className="h-4 w-4 text-forest mt-0.5" />
                       <span className="font-bold text-forest">{item.unit}</span>
                     </div>
                     <p className="mb-2 text-sm text-gray-700">{item.reason}</p>
-                    <div className="flex items-center justify-between">
-                      <p className="flex items-center gap-1 text-xs text-gray-600">
-                        <Calendar className="h-3 w-3" />
-                        Dự kiến: {item.date}
-                      </p>
-                      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">
-                        Cấp đơn vị
-                      </span>
-                    </div>
+                    <p className="flex items-start gap-1 text-xs text-gray-600">
+                      <Calendar className="h-3 w-3 mt-0.5" />
+                      Dự kiến: {item.date}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -162,8 +160,8 @@ function CommendationPage() {
 
           <Card className="border-2 border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 shadow-lg">
             <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Medal className="h-5 w-5 text-orange-600" />
+              <div className="flex items-start gap-2">
+                <Medal className="h-5 w-5 text-orange-600 mt-0.5" />
                 <h3 className="font-bold text-forest">Cá Nhân Tiêu Biểu</h3>
               </div>
               <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
@@ -177,26 +175,24 @@ function CommendationPage() {
                   key={item.name}
                   className="group relative overflow-hidden rounded-lg border border-orange-200/50 bg-gradient-to-r from-orange-50/50 to-transparent p-4 transition-all hover:shadow-md hover:border-orange-300"
                 >
-                  <div className="absolute top-2 right-2">
+                  <div className="absolute top-2 right-2 flex flex-col items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-red-500 text-white font-bold shadow-md">
                       <Star className="h-4 w-4" />
                     </div>
+                    <span className="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-xs font-semibold text-orange-700">
+                      Cá nhân
+                    </span>
                   </div>
-                  <div className="pr-12">
-                    <div className="mb-2 flex items-center gap-2">
-                      <User className="h-4 w-4 text-orange-600" />
+                  <div className="pr-20">
+                    <div className="mb-2 flex items-start gap-2">
+                      <User className="h-4 w-4 text-orange-600 mt-0.5" />
                       <span className="font-bold text-forest">{item.name}</span>
                     </div>
                     <p className="mb-2 text-sm text-gray-700">{item.reason}</p>
-                    <div className="flex items-center justify-between">
-                      <p className="flex items-center gap-1 text-xs text-gray-600">
-                        <Shield className="h-3 w-3" />
-                        {item.unit} • {item.date}
-                      </p>
-                      <span className="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-xs font-semibold text-orange-700">
-                        Cá nhân
-                      </span>
-                    </div>
+                    <p className="flex items-start gap-1 text-xs text-gray-600">
+                      <Shield className="h-3 w-3 mt-0.5" />
+                      {item.unit} • {item.date}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -204,17 +200,11 @@ function CommendationPage() {
           </Card>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1.3fr,0.7fr]">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr,0.7fr]">
           <Card className="border-2 border-border shadow-lg">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-forest" />
-                <h3 className="font-bold text-forest">Lịch Tuyên Dương & Trao Thưởng</h3>
-              </div>
-              <button className="flex items-center gap-1 text-sm font-medium text-olive hover:text-forest transition-colors">
-                Xem toàn bộ
-                <ChevronRight className="h-4 w-4" />
-              </button>
+            <div className="mb-4 flex items-start gap-2">
+              <Calendar className="h-5 w-5 text-forest mt-0.5" />
+              <h3 className="font-bold text-forest">Lịch Tuyên Dương & Trao Thưởng</h3>
             </div>
             <div className="space-y-3">
               {upcoming.map((item) => (
@@ -222,49 +212,51 @@ function CommendationPage() {
                   key={item.title}
                   className="group relative overflow-hidden rounded-lg border border-gray-200 bg-gradient-to-r from-white to-gray-50 p-4 transition-all hover:shadow-md hover:border-forest/30"
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex gap-3">
-                      <div className="rounded-lg bg-gradient-to-br from-yellow-100 to-yellow-200 p-3">
-                        <Trophy className="h-6 w-6 text-yellow-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-forest">{item.title}</h4>
-                        <div className="mt-2 space-y-1">
-                          <p className="flex items-center gap-1.5 text-sm text-gray-600">
-                            <Clock className="h-3.5 w-3.5" />
-                            {item.time}
-                          </p>
-                          <p className="flex items-center gap-1.5 text-sm text-gray-600">
-                            <MapPin className="h-3.5 w-3.5" />
-                            {item.location}
-                          </p>
-                        </div>
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
+                    <Sparkles className="h-3 w-3" />
+                    Sắp tới
+                  </span>
+                  <div className="flex gap-3 pr-16">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-100 to-yellow-200">
+                      <Trophy className="h-6 w-6 text-yellow-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-forest">{item.title}</h4>
+                      <div className="mt-2 space-y-1">
+                        <p className="flex items-start gap-1.5 text-sm text-gray-600">
+                          <Clock className="h-3.5 w-3.5 mt-0.5" />
+                          {item.time}
+                        </p>
+                        <p className="flex items-start gap-1.5 text-sm text-gray-600">
+                          <MapPin className="h-3.5 w-3.5 mt-0.5" />
+                          {item.location}
+                        </p>
                       </div>
                     </div>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                      <Sparkles className="h-3 w-3" />
-                      Sắp tới
-                    </span>
                   </div>
                 </div>
               ))}
             </div>
+            <button className="mt-4 flex w-full items-center justify-center gap-1 rounded-lg border border-forest/20 bg-white px-3 py-2 text-sm font-semibold text-olive hover:border-forest/40 hover:text-forest transition-colors">
+              Xem toàn bộ
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </Card>
 
           <div className="space-y-6">
             <Card
               className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0"
               title={
-                <div className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-sand" />
+                <div className="flex items-start gap-2">
+                  <Target className="h-5 w-5 text-sand mt-0.5" />
                   <span className="font-bold text-sand">Tiêu Chí Đánh Giá</span>
                 </div>
               }
             >
               <div className="space-y-3">
                 <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
-                  <h4 className="mb-2 text-sm font-semibold text-sand">Tiêu chuẩn đơn vị</h4>
-                  <ul className="m-0 space-y-1.5 text-xs text-sand/90">
+                  <h4 className="mb-2 text-base font-semibold text-sand">Tiêu chuẩn đơn vị</h4>
+                  <ul className="m-0 space-y-1.5 text-sm text-sand/90">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="mt-0.5 h-3 w-3 text-green-400" />
                       <span>Hoàn thành 100% kế hoạch</span>
@@ -281,8 +273,8 @@ function CommendationPage() {
                 </div>
 
                 <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
-                  <h4 className="mb-2 text-sm font-semibold text-sand">Tiêu chuẩn cá nhân</h4>
-                  <ul className="m-0 space-y-1.5 text-xs text-sand/90">
+                  <h4 className="mb-2 text-base font-semibold text-sand">Tiêu chuẩn cá nhân</h4>
+                  <ul className="m-0 space-y-1.5 text-sm text-sand/90">
                     <li className="flex items-start gap-2">
                       <Star className="mt-0.5 h-3 w-3 text-yellow-400" />
                       <span>Thành tích bắn xuất sắc</span>
@@ -301,47 +293,47 @@ function CommendationPage() {
             </Card>
 
             <Card className="border-2 border-yellow-200/50 bg-gradient-to-br from-white to-yellow-50/30 shadow-lg">
-              <div className="mb-3 flex items-center gap-2">
-                <Award className="h-5 w-5 text-orange-600" />
+              <div className="mb-3 flex items-start gap-2">
+                <Award className="h-5 w-5 text-orange-600 mt-0.5" />
                 <h3 className="font-bold text-forest">Hình thức khen thưởng</h3>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-red-50 to-orange-50 p-3 transition-all hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Target className="h-4 w-4 text-red-600" />
+                  <div className="flex items-start gap-2">
+                    <Target className="h-4 w-4 text-red-600 mt-0.5" />
                     <div>
-                      <p className="text-xs font-semibold text-gray-700">Hỏa lực</p>
-                      <p className="text-xs text-gray-600">Giấy khen</p>
+                      <p className="text-sm font-semibold text-forest">Hỏa lực</p>
+                      <p className="text-sm text-gray-700">Giấy khen</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 p-3 transition-all hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Heart className="h-4 w-4 text-green-600" />
+                  <div className="flex items-start gap-2">
+                    <Heart className="h-4 w-4 text-green-600 mt-0.5" />
                     <div>
-                      <p className="text-xs font-semibold text-gray-700">Thể lực</p>
-                      <p className="text-xs text-gray-600">Huy hiệu</p>
+                      <p className="text-sm font-semibold text-forest">Thể lực</p>
+                      <p className="text-sm text-gray-700">Huy hiệu</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 p-3 transition-all hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Brain className="h-4 w-4 text-blue-600" />
+                  <div className="flex items-start gap-2">
+                    <GraduationCap className="h-4 w-4 text-blue-600 mt-0.5" />
                     <div>
-                      <p className="text-xs font-semibold text-gray-700">Lý thuyết</p>
-                      <p className="text-xs text-gray-600">Phần thưởng</p>
+                      <p className="text-sm font-semibold text-forest">Lý thuyết</p>
+                      <p className="text-sm text-gray-700">Phần thưởng</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-yellow-50 to-amber-50 p-3 transition-all hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Flag className="h-4 w-4 text-yellow-600" />
+                  <div className="flex items-start gap-2">
+                    <Flag className="h-4 w-4 text-yellow-600 mt-0.5" />
                     <div>
-                      <p className="text-xs font-semibold text-gray-700">Đơn vị</p>
-                      <p className="text-xs text-gray-600">Cờ thi đua</p>
+                      <p className="text-sm font-semibold text-forest">Đơn vị</p>
+                      <p className="text-sm text-gray-700">Cờ thi đua</p>
                     </div>
                   </div>
                 </div>
@@ -350,36 +342,34 @@ function CommendationPage() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-xl border-2 border-yellow-300/30 bg-gradient-to-r from-yellow-50 via-orange-50/30 to-yellow-50 p-6">
-          <div className="flex items-start gap-4">
+        <div className="mt-6 rounded-xl border-2 border-yellow-300/30 bg-gradient-to-r from-yellow-50 via-orange-50/30 to-yellow-50 p-4 sm:p-6">
+          <div className="mb-4 flex items-center gap-3">
             <div className="rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 p-2">
               <Zap className="h-6 w-6 text-white" />
             </div>
-            <div className="flex-1">
-              <h3 className="mb-2 font-bold text-forest">Thông báo quan trọng</h3>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-lg bg-white/80 p-3">
-                  <div className="mb-1 flex items-center gap-1">
-                    <AlertCircle className="h-4 w-4 text-orange-600" />
-                    <p className="text-xs font-semibold uppercase text-gray-600">Hạn chót</p>
-                  </div>
-                  <p className="text-sm text-gray-700">Nộp đề xuất trước 15/04</p>
-                </div>
-                <div className="rounded-lg bg-white/80 p-3">
-                  <div className="mb-1 flex items-center gap-1">
-                    <TrendingUp className="h-4 w-4 text-green-600" />
-                    <p className="text-xs font-semibold uppercase text-gray-600">Tiến độ</p>
-                  </div>
-                  <p className="text-sm text-gray-700">60% đã hoàn tất thủ tục</p>
-                </div>
-                <div className="rounded-lg bg-white/80 p-3">
-                  <div className="mb-1 flex items-center gap-1">
-                    <Trophy className="h-4 w-4 text-yellow-600" />
-                    <p className="text-xs font-semibold uppercase text-gray-600">Quỹ thưởng</p>
-                  </div>
-                  <p className="text-sm text-gray-700">Còn 85% ngân sách</p>
-                </div>
+            <h3 className="m-0 text-lg font-bold text-forest">Thông báo quan trọng</h3>
+          </div>
+          <div className="space-y-3">
+            <div className="rounded-lg bg-white/80 p-3">
+              <div className="mb-1 flex items-start gap-1">
+                <AlertCircle className="h-4 w-4 text-orange-600 mt-0.5" />
+                <p className="text-xs font-semibold uppercase text-gray-600">Hạn chót</p>
               </div>
+              <p className="text-sm text-gray-700">Nộp đề xuất trước 15/04</p>
+            </div>
+            <div className="rounded-lg bg-white/80 p-3">
+              <div className="mb-1 flex items-start gap-1">
+                <TrendingUp className="h-4 w-4 text-green-600 mt-0.5" />
+                <p className="text-xs font-semibold uppercase text-gray-600">Tiến độ</p>
+              </div>
+              <p className="text-sm text-gray-700">60% đã hoàn tất thủ tục</p>
+            </div>
+            <div className="rounded-lg bg-white/80 p-3">
+              <div className="mb-1 flex items-start gap-1">
+                <Trophy className="h-4 w-4 text-yellow-600 mt-0.5" />
+                <p className="text-xs font-semibold uppercase text-gray-600">Quỹ thưởng</p>
+              </div>
+              <p className="text-sm text-gray-700">Còn 85% ngân sách</p>
             </div>
           </div>
         </div>

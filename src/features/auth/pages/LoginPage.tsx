@@ -63,8 +63,8 @@ function LoginPage() {
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
-        <p className="text-sm text-sand/40 font-medium">© 2024 Hệ thống Huấn luyện số - Bộ Quốc phòng</p>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-md">
+        <p className="text-xs sm:text-sm text-sand/40 font-medium">© 2024 Hệ thống Huấn luyện số - Bộ Quốc phòng</p>
       </div>
     </div>
   );

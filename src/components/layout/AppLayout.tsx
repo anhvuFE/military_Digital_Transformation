@@ -31,15 +31,15 @@ function AppLayout({ children }: Props) {
 
   return (
     <div className="app-shell bg-bg">
-      <Sidebar className="hidden md:flex" />
+      <Sidebar className="hidden lg:flex" />
       <div className="flex min-h-screen flex-col">
         <Topbar />
         <main className="page">{children}</main>
       </div>
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 flex md:hidden">
+        <div className="fixed inset-0 z-40 flex lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={closeSidebar} />
-          <Sidebar className="relative z-50 w-72" />
+          <Sidebar className="relative z-50 w-72 translate-x-0" />
         </div>
       )}
       <ToastContainer />

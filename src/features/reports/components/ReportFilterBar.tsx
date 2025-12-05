@@ -2,7 +2,6 @@ import type { Unit } from "@/types/unit";
 import type { ReportFilter } from "@/types/report";
 import Select from "@/components/common/Select";
 import DatePicker from "@/components/common/DatePicker";
-import { CalendarDays, Building2, Calendar } from "lucide-react";
 
 interface Props {
   units: Unit[];
@@ -15,8 +14,7 @@ function ReportFilterBar({ units, filter, onChange }: Props) {
     <div className="space-y-4">
       <div className="grid gap-4">
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-            <CalendarDays className="h-4 w-4" />
+          <label className="mb-2 text-sm font-semibold text-forest">
             Từ ngày
           </label>
           <DatePicker
@@ -27,8 +25,7 @@ function ReportFilterBar({ units, filter, onChange }: Props) {
         </div>
 
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-            <Calendar className="h-4 w-4" />
+          <label className="mb-2 text-sm font-semibold text-forest">
             Đến ngày
           </label>
           <DatePicker
@@ -39,8 +36,7 @@ function ReportFilterBar({ units, filter, onChange }: Props) {
         </div>
 
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-            <Building2 className="h-4 w-4" />
+          <label className="mb-2 text-sm font-semibold text-forest">
             Đơn vị
           </label>
           <Select

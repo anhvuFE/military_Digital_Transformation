@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactNode } from "react";
 import clsx from "clsx";
 
 interface Props {
-  title?: string;
+  title?: ReactNode;
   extra?: ReactNode;
   className?: string;
 }

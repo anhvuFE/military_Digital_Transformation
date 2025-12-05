@@ -1,29 +1,19 @@
-import { createPortal } from "react-dom";
 import { useUiStore } from "@/store/uiStore";
-import Button from "./Button";
+import { Modal } from "@/components/ui/modal";
 
-function Modal() {
+function ModalContainer() {
   const { modal, closeModal } = useUiStore();
-  if (!modal.open) return null;
 
-  return createPortal(
-    <div className="modal-backdrop" role="dialog" aria-modal="true">
-      <div className="modal">
-        <div className="flex items-center justify-between mb-3">
-          <h3 style={{ margin: 0 }}>{modal.title}</h3>
-          <button
-            aria-label="Đóng"
-            onClick={closeModal}
-            className="rounded-full border border-border bg-white px-2 py-1 text-olive hover:bg-sand/60"
-          >
-            ×
-          </button>
-        </div>
-        <div>{modal.content}</div>
-      </div>
-    </div>,
-    document.body,
+  return (
+    <Modal
+      open={modal.open}
+      onClose={closeModal}
+      title={modal.title}
+      className="modal-wide max-w-[95%] lg:max-w-[900px]"
+    >
+      <div className="modal-content">{modal.content}</div>
+    </Modal>
   );
 }
 
-export default Modal;
+export default ModalContainer;

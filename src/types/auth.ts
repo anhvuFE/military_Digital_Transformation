@@ -7,4 +7,5 @@ export interface User {
   serviceNumber: string;
   role: Role;
   unitId: string;
+  unit?: string; // Unit name for display purposes
 }

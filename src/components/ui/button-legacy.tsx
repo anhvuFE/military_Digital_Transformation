@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
-function Button({
+function ButtonLegacy({
   children,
   variant = "primary",
   fullWidth,
@@ -36,4 +36,4 @@ function Button({
   );
 }
 
-export default Button;
+export default ButtonLegacy;

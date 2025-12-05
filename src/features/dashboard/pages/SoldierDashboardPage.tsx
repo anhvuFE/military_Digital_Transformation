@@ -29,66 +29,67 @@ function SoldierDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+      <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 md:p-8 text-sand shadow-xl sm:shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-                <User className="h-8 w-8 text-sand" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+                <User className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
               </div>
-              <div>
-                <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                  <span className="h-1 w-8 rounded-full bg-orange" />
+              <div className="flex-1">
+                <p className="mb-1 flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
+                  <span className="h-1 w-6 sm:w-8 rounded-full bg-orange flex-shrink-0" />
                   Hồ sơ cá nhân
                 </p>
-                <h1 className="mb-2 text-3xl font-bold text-sand">Trung Tâm Huấn Luyện Số</h1>
-                <p className="text-sm font-medium text-sand/90">Theo dõi tiến độ và hiệu suất huấn luyện cá nhân</p>
+                <h1 className="mb-1 sm:mb-2 text-xl sm:text-2xl md:text-3xl font-bold text-sand">Trung Tâm Huấn Luyện Số</h1>
+                <p className="text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Theo dõi tiến độ và hiệu suất huấn luyện cá nhân</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-sand backdrop-blur-sm">
-                <Shield className="h-4 w-4" />
-                {user?.name || "Quân nhân"}
+            <div className="flex flex-row sm:flex-row gap-2 w-full sm:w-auto">
+              <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-white/10 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-sand backdrop-blur-sm">
+                <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <span className="truncate max-w-[100px] sm:max-w-none">{user?.fullName || "Quân nhân"}</span>
               </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-orange px-4 py-2 text-sm font-semibold text-white">
-                <Activity className="h-4 w-4" />
-                Đang hoạt động
+              <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-orange px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white">
+                <Activity className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Đang hoạt động</span>
+                <span className="xs:hidden">Hoạt động</span>
               </span>
             </div>
           </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-xl border border-green-200/30 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+          <div className="group relative overflow-hidden rounded-xl border border-green-200/30 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-green-100 p-2">
-                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-green-100 p-1.5 sm:p-2">
+                  <CheckCircle2 className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
                 </div>
-                <span className="text-xs font-semibold text-green-600">Đạt chuẩn</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-green-600">Đạt chuẩn</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Buổi hoàn thành</p>
-              <p className="text-2xl font-bold text-forest">{completed}</p>
-              <p className="mt-1 text-xs text-gray-500">Tiến độ cá nhân</p>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Buổi hoàn thành</p>
+              <p className="text-lg sm:text-2xl font-bold text-forest">{completed}</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Tiến độ cá nhân</p>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-orange-200/30 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+          <div className="group relative overflow-hidden rounded-xl border border-orange-200/30 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-orange-100 p-2">
-                  <Target className="h-6 w-6 text-orange-600" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-orange-100 p-1.5 sm:p-2">
+                  <Target className="h-4 w-4 sm:h-6 sm:w-6 text-orange-600" />
                 </div>
-                <span className="text-xs font-semibold text-orange-600">Cần bổ sung</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-orange-600">Cần bổ sung</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Khóa còn thiếu</p>
-              <p className="text-2xl font-bold text-orange-600">{pendingRequired}</p>
-              <p className="mt-1 text-xs text-gray-500">Cần hoàn tất</p>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Khóa còn thiếu</p>
+              <p className="text-lg sm:text-2xl font-bold text-orange-600">{pendingRequired}</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Cần hoàn tất</p>
             </div>
           </div>
 

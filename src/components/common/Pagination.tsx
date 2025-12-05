@@ -23,7 +23,7 @@ function Pagination({
 
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
-    const maxVisible = 5;
+    const maxVisible = window.innerWidth < 640 ? 3 : 5;
 
     if (totalPages <= maxVisible + 2) {
       for (let i = 1; i <= totalPages; i++) {
@@ -59,44 +59,42 @@ function Pagination({
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       {showInfo && totalItems > 0 && (
-        <div className="text-sm text-gray-600">
-          Hiển thị <span className="font-semibold">{startItem}-{endItem}</span> trong tổng số{" "}
-          <span className="font-semibold">{totalItems}</span> kết quả
+        <div className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
+          <span className="hidden sm:inline">Hiển thị <span className="font-semibold">{startItem}-{endItem}</span> trong tổng số{" "}
+          <span className="font-semibold">{totalItems}</span> kết quả</span>
+          <span className="sm:hidden"><span className="font-semibold">{startItem}-{endItem}</span> / {totalItems}</span>
         </div>
       )}
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5 sm:gap-1">
         <Button
           variant="ghost"
-          size="sm"
           onClick={() => onPageChange(1)}
           disabled={currentPage === 1}
-          className="p-2"
+          className="p-1.5 sm:p-2 hidden sm:block"
         >
-          <ChevronsLeft className="h-4 w-4" />
+          <ChevronsLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
 
         <Button
           variant="ghost"
-          size="sm"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2"
+          className="p-1.5 sm:p-2"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1">
           {getPageNumbers().map((page, index) => (
             page === "..." ? (
-              <span key={`ellipsis-${index}`} className="px-2 text-gray-400">...</span>
+              <span key={`ellipsis-${index}`} className="px-1 sm:px-2 text-xs sm:text-sm text-gray-400">...</span>
             ) : (
               <Button
                 key={page}
                 variant={currentPage === page ? "primary" : "ghost"}
-                size="sm"
                 onClick={() => onPageChange(page as number)}
-                className={`min-w-[36px] ${currentPage === page ? "bg-forest text-white" : ""}`}
+                className={`min-w-[28px] sm:min-w-[36px] h-7 sm:h-9 text-xs sm:text-sm ${currentPage === page ? "bg-forest text-white" : ""}`}
               >
                 {page}
               </Button>
@@ -106,22 +104,20 @@ function Pagination({
 
         <Button
           variant="ghost"
-          size="sm"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2"
+          className="p-1.5 sm:p-2"
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
 
         <Button
           variant="ghost"
-          size="sm"
           onClick={() => onPageChange(totalPages)}
           disabled={currentPage === totalPages}
-          className="p-2"
+          className="p-1.5 sm:p-2 hidden sm:block"
         >
-          <ChevronsRight className="h-4 w-4" />
+          <ChevronsRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
       </div>
     </div>

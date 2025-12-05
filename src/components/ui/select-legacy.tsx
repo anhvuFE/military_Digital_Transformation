@@ -19,7 +19,7 @@ interface Props<T extends string | number> {
   className?: string;
 }
 
-function Select<T extends string | number>({
+function SelectLegacy<T extends string | number>({
   options,
   value,
   placeholder = "Chọn...",
@@ -53,4 +53,4 @@ function Select<T extends string | number>({
   );
 }
 
-export default Select;
+export default SelectLegacy;

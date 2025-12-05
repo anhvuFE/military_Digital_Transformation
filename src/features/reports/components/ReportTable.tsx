@@ -19,9 +19,11 @@ function ReportTable({ rows }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-xl border-2 border-gray-200 bg-white">
-      <div className="overflow-x-auto">
-        <table className="min-w-full">
+    <>
+      {/* Desktop Table View */}
+      <div className="hidden sm:block overflow-hidden rounded-xl border-2 border-gray-200 bg-white">
+        <div className="overflow-x-auto">
+          <table className="min-w-full">
           <thead>
             <tr className="bg-gradient-to-r from-forest to-olive">
               <th className="px-6 py-4 text-left">
@@ -123,7 +125,81 @@ function ReportTable({ rows }: Props) {
               );
             })}
           </tbody>
-        </table>
+          </table>
+        </div>
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="sm:hidden space-y-4">
+        {rows.map((row, index) => {
+          const badge = getCompletionBadge(row.completionRate);
+          const BadgeIcon = badge.icon;
+
+          return (
+            <div
+              key={row.unitId}
+              className="card p-4 shadow-sm hover:shadow-md transition-all"
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className={`h-8 w-1.5 rounded-full bg-gradient-to-b ${
+                    index === 0 ? 'from-yellow-500 to-yellow-600' :
+                    index === 1 ? 'from-gray-400 to-gray-500' :
+                    index === 2 ? 'from-orange-400 to-orange-500' :
+                    'from-forest to-olive'
+                  }`} />
+                  <div>
+                    <h4 className="font-bold text-forest">{row.unitName}</h4>
+                    <p className="text-xs text-gray-500">ID: {row.unitId}</p>
+                  </div>
+                </div>
+
+                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${badge.color}`}>
+                  <BadgeIcon className="h-3.5 w-3.5" />
+                  {badge.label}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 mb-1">SỐ BUỔI</p>
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5">
+                    <Calendar className="h-3.5 w-3.5 text-blue-700" />
+                    <span className="text-sm font-bold text-blue-700">{row.totalSessions}</span>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 mb-1">QUÂN NHÂN THIẾU</p>
+                  {row.pendingSoldiers > 0 ? (
+                    <div className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-3 py-1.5">
+                      <AlertTriangle className="h-3.5 w-3.5 text-red-700" />
+                      <span className="text-sm font-bold text-red-700">{row.pendingSoldiers}</span>
+                    </div>
+                  ) : (
+                    <div className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1.5">
+                      <CheckCircle className="h-3.5 w-3.5 text-green-700" />
+                      <span className="text-sm font-bold text-green-700">0</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-gray-500">TỶ LẸ HOÀN THÀNH</p>
+                  <span className="text-lg font-bold text-forest">{row.completionRate}%</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-gray-200">
+                  <div
+                    className={`h-full rounded-full bg-gradient-to-r ${getCompletionColor(row.completionRate)} transition-all`}
+                    style={{ width: `${row.completionRate}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {rows.length === 0 && (
@@ -133,7 +209,7 @@ function ReportTable({ rows }: Props) {
           <p className="text-sm text-gray-400">Chọn khoảng thời gian khác để xem báo cáo</p>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

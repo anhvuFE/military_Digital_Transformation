@@ -138,8 +138,8 @@ function UserTrainingHistoryPage() {
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                <span className="h-1 w-8 rounded-full bg-orange" />
+              <p className="mb-1 flex items-start gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
+                <span className="h-1 w-8 rounded-full bg-orange mt-1" />
                 Lịch sử cá nhân
               </p>
               <h1 className="mb-2 text-3xl font-bold text-sand">Lịch Sử Huấn Luyện</h1>
@@ -195,8 +195,8 @@ function UserTrainingHistoryPage() {
 
         {/* Filter Bar */}
         <Card className="border-2 border-gray-200 shadow-lg">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter className="h-5 w-5 text-forest" />
+          <div className="flex items-start gap-2 mb-4">
+            <Filter className="h-5 w-5 text-forest mt-0.5" />
             <h2 className="font-bold text-forest">Bộ lọc và tìm kiếm</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -208,13 +208,13 @@ function UserTrainingHistoryPage() {
             <Select
               options={statusOptions}
               value={statusFilter}
-              onChange={setStatusFilter}
+              onChange={(value) => setStatusFilter(value || "all")}
               placeholder="Trạng thái"
             />
             <Select
               options={dateRangeOptions}
               value={dateRange}
-              onChange={setDateRange}
+              onChange={(value) => setDateRange(value || "all")}
               placeholder="Thời gian"
             />
           </div>
@@ -238,8 +238,8 @@ function UserTrainingHistoryPage() {
 
         {/* Training History List */}
         <Card className="border-2 border-border shadow-lg">
-          <div className="flex items-center gap-2 mb-4">
-            <BarChart3 className="h-5 w-5 text-forest" />
+          <div className="flex items-start gap-2 mb-4">
+            <BarChart3 className="h-5 w-5 text-forest mt-0.5" />
             <h2 className="font-bold text-forest">Chi tiết lịch sử huấn luyện</h2>
           </div>
 
@@ -251,7 +251,7 @@ function UserTrainingHistoryPage() {
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-start gap-3 mb-2">
                       <h3 className="font-semibold text-forest">
                         {item.session.title || item.session.courseId}
                       </h3>
@@ -259,8 +259,8 @@ function UserTrainingHistoryPage() {
                     </div>
 
                     <div className="grid gap-2 sm:grid-cols-3 text-sm text-gray-600">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-gray-400" />
+                      <div className="flex items-start gap-2">
+                        <Calendar className="h-4 w-4 text-gray-400 mt-0.5" />
                         <span>
                           {new Date(item.session.startTime).toLocaleDateString("vi-VN", {
                             day: "2-digit",
@@ -269,8 +269,8 @@ function UserTrainingHistoryPage() {
                           })}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-gray-400" />
+                      <div className="flex items-start gap-2">
+                        <Clock className="h-4 w-4 text-gray-400 mt-0.5" />
                         <span>
                           {new Date(item.session.startTime).toLocaleTimeString("vi-VN", {
                             hour: "2-digit",
@@ -282,8 +282,8 @@ function UserTrainingHistoryPage() {
                         </span>
                       </div>
                       {item.enrollment.score !== null && (
-                        <div className="flex items-center gap-2">
-                          <Award className="h-4 w-4 text-gray-400" />
+                        <div className="flex items-start gap-2">
+                          <Award className="h-4 w-4 text-gray-400 mt-0.5" />
                           <span className="font-semibold">
                             Điểm: {item.enrollment.score}
                           </span>
@@ -291,10 +291,10 @@ function UserTrainingHistoryPage() {
                       )}
                     </div>
 
-                    {item.enrollment.feedback && (
+                    {item.enrollment.remark && (
                       <div className="mt-3 rounded-lg bg-gray-50 p-3">
                         <p className="text-sm text-gray-700">
-                          <span className="font-medium">Nhận xét:</span> {item.enrollment.feedback}
+                          <span className="font-medium">Nhận xét:</span> {item.enrollment.remark}
                         </p>
                       </div>
                     )}

@@ -31,8 +31,8 @@ function SessionFormModal({ initial, courses, units, onSubmit, onCancel }: Props
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div className="grid gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
+      <div className="grid gap-3 sm:gap-4">
         <div>
           <label>Khóa huấn luyện</label>
         <Select
@@ -55,7 +55,7 @@ function SessionFormModal({ initial, courses, units, onSubmit, onCancel }: Props
           <label>Tiêu đề buổi</label>
           <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label>Bắt đầu</label>
             <DateTimePicker
@@ -83,7 +83,7 @@ function SessionFormModal({ initial, courses, units, onSubmit, onCancel }: Props
         </div>
       </div>
 
-      <div className="flex gap-3 mt-6 pt-4 border-t border-border">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border">
         <Button
           type="button"
           variant="secondary"

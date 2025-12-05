@@ -72,29 +72,29 @@ function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+      <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 md:p-8 text-sand shadow-xl sm:shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-                <Shield className="h-8 w-8 text-sand" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+                <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-sand" />
               </div>
-              <div>
-                <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                  <span className="h-1 w-8 rounded-full bg-orange" />
+              <div className="flex-1">
+                <p className="mb-1 flex items-center sm:items-start gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sand/80">
+                  <span className="h-1 w-6 sm:w-8 rounded-full bg-orange mt-0.5 sm:mt-1 flex-shrink-0" />
                   Trung tâm Chỉ huy
                 </p>
-                <h1 className="mb-2 text-3xl font-bold text-sand">Bảng Điều Khiển Chiến Lược</h1>
-                <p className="text-sm font-medium text-sand/90">Hệ thống giám sát huấn luyện và chuyển đổi số quân đội</p>
+                <h1 className="mb-1 sm:mb-2 text-lg sm:text-2xl md:text-3xl font-bold text-sand">Bảng Điều Khiển Chiến Lược</h1>
+                <p className="text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Hệ thống giám sát huấn luyện và chuyển đổi số quân đội</p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <Button
                 variant="secondary"
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand text-xs sm:text-sm"
                 onClick={() => navigate("/reports")}
               >
                 <Activity className="mr-2 h-4 w-4" />
@@ -102,7 +102,7 @@ function AdminDashboardPage() {
               </Button>
               <Button
                 variant="secondary"
-                className="bg-orange text-white hover:bg-orange/90 border-orange"
+                className="bg-orange text-white hover:bg-orange/90 border-orange text-xs sm:text-sm"
                 onClick={() => navigate("/sessions")}
               >
                 <Zap className="mr-2 h-4 w-4" />
@@ -112,88 +112,88 @@ function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-xl border border-forest/10 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+        <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="group relative overflow-hidden rounded-xl border border-forest/10 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-forest/5 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-forest/10 p-2">
-                  <Target className="h-6 w-6 text-forest" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-forest/10 p-1.5 sm:p-2">
+                  <Target className="h-4 w-4 sm:h-6 sm:w-6 text-forest" />
                 </div>
-                <span className="text-xs font-semibold text-green-600">+12%</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-green-600">+12%</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Buổi huấn luyện</p>
-              <p className="text-2xl font-bold text-forest">{totalSessions}</p>
-              <div className="mt-2 h-1 w-full rounded-full bg-gray-200">
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Buổi huấn luyện</p>
+              <p className="text-lg sm:text-2xl font-bold text-forest">{totalSessions}</p>
+              <div className="mt-1.5 sm:mt-2 h-1 w-full rounded-full bg-gray-200">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-forest to-olive" />
               </div>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-olive/10 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+          <div className="group relative overflow-hidden rounded-xl border border-olive/10 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-olive/5 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-olive/10 p-2">
-                  <TrendingUp className="h-6 w-6 text-olive" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-olive/10 p-1.5 sm:p-2">
+                  <TrendingUp className="h-4 w-4 sm:h-6 sm:w-6 text-olive" />
                 </div>
-                <span className="text-xs font-semibold text-orange">Tăng trưởng</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-orange">Tăng trưởng</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Tỷ lệ hoàn thành</p>
-              <p className="text-2xl font-bold text-olive">{completionRate}%</p>
-              <div className="mt-2 h-1 w-full rounded-full bg-gray-200">
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Tỷ lệ hoàn thành</p>
+              <p className="text-lg sm:text-2xl font-bold text-olive">{completionRate}%</p>
+              <div className="mt-1.5 sm:mt-2 h-1 w-full rounded-full bg-gray-200">
                 <div className="h-full rounded-full bg-gradient-to-r from-olive to-moss" style={{width: `${completionRate}%`}} />
               </div>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-orange/10 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+          <div className="group relative overflow-hidden rounded-xl border border-orange/10 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-orange/5 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-orange/10 p-2">
-                  <Award className="h-6 w-6 text-orange" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-orange/10 p-1.5 sm:p-2">
+                  <Award className="h-4 w-4 sm:h-6 sm:w-6 text-orange" />
                 </div>
-                <span className="text-xs font-semibold text-green-600">Xuất sắc</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-green-600">Xuất sắc</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Đơn vị dẫn đầu</p>
-              <p className="text-lg font-bold text-orange">{topUnits[0]?.unitName ?? "Đang cập nhật"}</p>
-              <div className="mt-2 flex items-center gap-1">
-                <span className="text-xs text-gray-500">Hiệu suất:</span>
-                <span className="text-sm font-semibold text-green-600">{topUnits[0]?.completionRate ?? 0}%</span>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Đơn vị dẫn đầu</p>
+              <p className="text-sm sm:text-lg font-bold text-orange truncate">{topUnits[0]?.unitName ?? "Đang cập nhật"}</p>
+              <div className="mt-1.5 sm:mt-2 flex items-center gap-1">
+                <span className="text-[10px] sm:text-xs text-gray-500">Hiệu suất:</span>
+                <span className="text-xs sm:text-sm font-semibold text-green-600">{topUnits[0]?.completionRate ?? 0}%</span>
               </div>
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-moss/10 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+          <div className="group relative overflow-hidden rounded-xl border border-moss/10 bg-white p-4 sm:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-moss/5 to-transparent" />
             <div className="relative">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="rounded-lg bg-moss/10 p-2">
-                  <Users className="h-6 w-6 text-moss" />
+              <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                <div className="rounded-lg bg-moss/10 p-1.5 sm:p-2">
+                  <Users className="h-4 w-4 sm:h-6 sm:w-6 text-moss" />
                 </div>
-                <span className="text-xs font-semibold text-blue-600">Hoạt động</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-blue-600">Hoạt động</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Tổng quân nhân</p>
-              <p className="text-2xl font-bold text-moss">{enrollments.length}</p>
-              <div className="mt-2 flex items-center gap-1">
-                <span className="text-xs text-gray-500">Tham gia:</span>
-                <span className="text-sm font-semibold text-forest">{enrollments.filter(e => e.status !== "ABSENT").length}</span>
+              <p className="text-[11px] sm:text-sm font-medium text-gray-600">Tổng quân nhân</p>
+              <p className="text-lg sm:text-2xl font-bold text-moss">{enrollments.length}</p>
+              <div className="mt-1.5 sm:mt-2 flex items-center gap-1">
+                <span className="text-[10px] sm:text-xs text-gray-500">Tham gia:</span>
+                <span className="text-xs sm:text-sm font-semibold text-forest">{enrollments.filter(e => e.status !== "ABSENT").length}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1.3fr,0.7fr]">
-          <div className="rounded-xl border border-border bg-white p-6 shadow-lg">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr,0.7fr]">
+          <div className="rounded-xl border border-border bg-white p-4 sm:p-6 shadow-lg">
             <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <div className="rounded-lg bg-gradient-to-br from-forest to-olive p-2">
-                  <Calendar className="h-5 w-5 text-white" />
+                  <Calendar className="h-5 w-5 text-white mt-0.5" />
                 </div>
                 <h2 className="text-lg font-bold text-forest">Lịch Huấn Luyện Sắp Tới</h2>
               </div>
-              <Button variant="ghost" size="sm" className="text-olive hover:text-forest" onClick={() => navigate("/sessions")}>
+              <Button variant="ghost" className="text-olive hover:text-forest" onClick={() => navigate("/sessions")}>
                 Xem tất cả
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
@@ -203,14 +203,14 @@ function AdminDashboardPage() {
 
           <div className="space-y-4">
             {/* Filter Bar */}
-            <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-              <div className="space-y-4">
+            <div className="rounded-xl border border-gray-200 bg-white p-3 sm:p-4 shadow-sm">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Filter className="h-5 w-5 text-forest" />
-                    <h3 className="font-semibold text-forest">Lọc & Tìm kiếm</h3>
+                    <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-forest" />
+                    <h3 className="text-sm sm:text-base font-semibold text-forest">Lọc & Tìm kiếm</h3>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <button
                       onClick={() => setViewMode('cards')}
                       className={`rounded-lg p-2 transition-colors ${
@@ -238,16 +238,16 @@ function AdminDashboardPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-2 sm:gap-3 grid-cols-1">
                   <SearchInput
                     value={searchQuery}
                     onChange={setSearchQuery}
-                    placeholder="Tìm theo tên hoặc mã đơn vị..."
+                    placeholder="Tìm đơn vị..."
                   />
                   <Select
                     options={statusOptions}
                     value={statusFilter}
-                    onChange={setStatusFilter}
+                    onChange={(value) => setStatusFilter(value || "all")}
                     placeholder="Lọc theo trạng thái"
                   />
                 </div>
@@ -271,7 +271,7 @@ function AdminDashboardPage() {
             </div>
 
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
+              <div className="flex items-start gap-2">
                 <Database className="h-5 w-5 text-forest" />
                 <h3 className="font-bold text-forest">Tình Hình Đơn Vị</h3>
               </div>
@@ -284,7 +284,7 @@ function AdminDashboardPage() {
             {/* Top performing units */}
             <div>
               <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-start gap-2">
                   <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Đơn vị xuất sắc ({topUnits.length})</p>
                 </div>
@@ -296,7 +296,7 @@ function AdminDashboardPage() {
                 </button>
               </div>
               {expandedSections.excellent && (
-                <div className="grid gap-3 md:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                   {topUnits.map((u, idx) => (
                     <div
                       key={u.unitId}
@@ -371,7 +371,7 @@ function AdminDashboardPage() {
             {/* Units needing support */}
             <div>
               <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-start gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange" />
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">Cần hỗ trợ khẩn cấp ({weakUnits.length})</p>
                 </div>
@@ -383,7 +383,7 @@ function AdminDashboardPage() {
                 </button>
               </div>
               {expandedSections.needSupport && (
-                <div className="grid gap-3 md:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2">
                   {weakUnits.map((u) => (
                     <div
                       key={u.unitId}
@@ -402,7 +402,7 @@ function AdminDashboardPage() {
                       </div>
 
                       <div className="flex items-center justify-between mb-3 p-3 bg-red-50 rounded-lg">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-start gap-2">
                           <Users className="h-4 w-4 text-red-600" />
                           <span className="text-sm font-medium text-red-700">Quân nhân chưa đạt</span>
                         </div>
@@ -450,7 +450,6 @@ function AdminDashboardPage() {
                   <h3 className="font-bold text-forest">Tất cả đơn vị ({filteredReport.length})</h3>
                   <Button
                     variant="secondary"
-                    size="sm"
                     onClick={() => navigate("/reports")}
                   >
                     Xem báo cáo chi tiết
@@ -583,12 +582,12 @@ function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.1fr,0.9fr]">
           <Card
             className="border-2 border-border shadow-lg"
             title={
-              <div className="flex items-center gap-2">
-                <Activity className="h-5 w-5 text-forest" />
+              <div className="flex items-start gap-2">
+                <Activity className="h-5 w-5 text-forest mt-0.5" />
                 <span className="font-bold text-forest">Kết Quả Huấn Luyện Gần Đây</span>
               </div>
             }
@@ -640,7 +639,7 @@ function AdminDashboardPage() {
           <Card
             className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0"
             title={
-              <div className="flex items-center gap-2">
+              <div className="flex items-start gap-2">
                 <Zap className="h-5 w-5 text-sand" />
                 <span className="font-bold text-sand">Trung Tâm Chỉ Huy Nhanh</span>
               </div>

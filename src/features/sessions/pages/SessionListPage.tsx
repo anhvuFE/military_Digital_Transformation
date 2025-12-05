@@ -105,37 +105,38 @@ function SessionListPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+      <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 md:p-8 text-sand shadow-xl sm:shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-                  <Calendar className="h-8 w-8 text-sand" />
-                </div>
-                <div>
-                  <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                    <span className="h-1 w-8 rounded-full bg-orange" />
+              <div className="flex flex-col gap-3">
+                <div className="flex items-start justify-center sm:justify-start gap-3">
+                  <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+                    <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
+                  </div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                     Trung tâm Lập Kế Hoạch
                   </p>
-                  <h1 className="mb-2 text-3xl font-bold text-sand">Lịch Huấn Luyện Chiến Thuật</h1>
-                  <p className="text-sm font-medium text-sand/90">Quản lý và triển khai buổi huấn luyện toàn quân khu</p>
+                </div>
+                <div className="text-center sm:text-left">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-sand">Lịch Huấn Luyện Chiến Thuật</h1>
+                  <p className="mt-1 text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Quản lý và triển khai buổi huấn luyện toàn quân khu</p>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-row gap-2 w-full sm:w-auto">
                 <Button
                   variant="secondary"
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
+                  className="flex-1 sm:flex-none bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand text-xs sm:text-sm px-3 py-2 justify-center"
                   onClick={() => window.location.reload()}
                 >
                   <Activity className="mr-2 h-4 w-4" />
                   Làm mới
                 </Button>
                 <Button
-                  className="bg-orange text-white hover:bg-orange/90 border-orange"
+                  className="flex-1 sm:flex-none bg-orange text-white hover:bg-orange/90 border-orange text-xs sm:text-sm px-3 py-2 justify-center"
                   onClick={openCreateModal}
                 >
                   <Plus className="mr-2 h-4 w-4" />
@@ -144,15 +145,15 @@ function SessionListPage() {
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+            <div className="mt-4 sm:mt-6 grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-3 sm:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="mb-1 text-xs font-medium uppercase tracking-wider text-sand/70">Tổng buổi</p>
-                    <p className="text-2xl font-bold text-sand">{filteredSessions.length}</p>
+                    <p className="mb-1 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Tổng buổi</p>
+                    <p className="text-lg sm:text-2xl font-bold text-sand">{filteredSessions.length}</p>
                   </div>
-                  <div className="rounded-lg bg-white/20 p-2">
-                    <Calendar className="h-5 w-5 text-sand" />
+                  <div className="rounded-lg bg-white/20 p-1.5 sm:p-2">
+                    <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-sand" />
                   </div>
                 </div>
                 <div className="mt-2 h-1 w-full rounded-full bg-white/20">
@@ -160,45 +161,45 @@ function SessionListPage() {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-3 sm:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="mb-1 text-xs font-medium uppercase tracking-wider text-sand/70">Sắp diễn ra</p>
-                    <p className="text-2xl font-bold text-sand">{upcomingCount}</p>
+                    <p className="mb-1 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Sắp diễn ra</p>
+                    <p className="text-lg sm:text-2xl font-bold text-sand">{upcomingCount}</p>
                   </div>
-                  <div className="rounded-lg bg-white/20 p-2">
-                    <Clock className="h-5 w-5 text-orange" />
+                  <div className="rounded-lg bg-white/20 p-1.5 sm:p-2">
+                    <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-orange" />
                   </div>
                 </div>
-                <div className="mt-2 flex items-center gap-1">
-                  <Radio className="h-3 w-3 text-green-400 animate-pulse" />
+                <div className="mt-2 flex items-start gap-1">
+                  <Radio className="h-3 w-3 text-green-400 animate-pulse mt-0.5" />
                   <span className="text-xs text-sand/80">Đang hoạt động</span>
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-3 sm:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="mb-1 text-xs font-medium uppercase tracking-wider text-sand/70">Đơn vị</p>
-                    <p className="text-2xl font-bold text-sand">{totalUnitsCovered}</p>
+                    <p className="mb-1 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Đơn vị</p>
+                    <p className="text-lg sm:text-2xl font-bold text-sand">{totalUnitsCovered}</p>
                   </div>
-                  <div className="rounded-lg bg-white/20 p-2">
-                    <Users className="h-5 w-5 text-sand" />
+                  <div className="rounded-lg bg-white/20 p-1.5 sm:p-2">
+                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-sand" />
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-sand/70">Tham gia huấn luyện</p>
               </div>
 
-              <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all hover:bg-white/20">
+              <div className="group relative overflow-hidden rounded-lg sm:rounded-xl border border-white/20 bg-white/10 p-3 sm:p-4 backdrop-blur-sm transition-all hover:bg-white/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="mb-1 text-xs font-medium uppercase tracking-wider text-sand/70">Hoàn thành</p>
-                    <p className="text-2xl font-bold text-sand">
+                    <p className="mb-1 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-sand/70">Hoàn thành</p>
+                    <p className="text-lg sm:text-2xl font-bold text-sand">
                       {Math.round((enrollments.filter(e => e.status === "COMPLETED").length / Math.max(enrollments.length, 1)) * 100)}%
                     </p>
                   </div>
-                  <div className="rounded-lg bg-white/20 p-2">
-                    <TrendingUp className="h-5 w-5 text-green-400" />
+                  <div className="rounded-lg bg-white/20 p-1.5 sm:p-2">
+                    <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-sand/70">Tỷ lệ thành công</p>
@@ -207,11 +208,11 @@ function SessionListPage() {
           </div>
         </div>
 
-        <Card className="border-2 border-forest/10 bg-white shadow-lg">
-          <div className="grid gap-4 lg:grid-cols-2">
+        <Card className="border-2 border-forest/10 bg-white shadow-lg p-3 sm:p-4 md:p-5">
+          <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
             <div>
-              <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-                <Search className="h-4 w-4" />
+              <label className="mb-2 flex items-start gap-2 text-xs sm:text-sm font-semibold text-forest">
+                <Search className="h-4 w-4 mt-0.5" />
                 Tìm kiếm buổi huấn luyện
               </label>
               <div className="relative">
@@ -223,15 +224,15 @@ function SessionListPage() {
                 />
                 <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               </div>
-              <div className="mt-2 flex items-center gap-2 text-xs text-gray-600">
-                <AlertCircle className="h-3 w-3" />
+              <div className="mt-2 flex items-start gap-2 text-xs text-gray-600">
+                <AlertCircle className="h-3 w-3 mt-0.5" />
                 <span>Gợi ý: Tìm theo giảng viên, địa điểm hoặc tên khóa</span>
               </div>
             </div>
 
             <div>
-              <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-                <Filter className="h-4 w-4" />
+              <label className="mb-2 flex items-start gap-2 text-xs sm:text-sm font-semibold text-forest">
+                <Filter className="h-4 w-4 mt-0.5" />
                 Bộ lọc theo đơn vị & tuần
               </label>
               <SessionFilterBar units={units} filters={filters} onChange={setFilters} variant="plain" />
@@ -239,19 +240,19 @@ function SessionListPage() {
           </div>
         </Card>
 
-        <div className="grid gap-6 lg:grid-cols-[1.4fr,0.6fr]">
-          <Card className="border-2 border-border shadow-lg">
-            <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
-              <div className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-forest" />
-                <h2 className="text-lg font-bold text-forest">Danh Sách Buổi Huấn Luyện</h2>
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.4fr,0.6fr]">
+          <Card className="border-2 border-border shadow-lg p-3 sm:p-4 md:p-5">
+            <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-gray-200 pb-3 sm:pb-4">
+              <div className="flex items-start gap-2">
+                <Target className="h-5 w-5 text-forest mt-0.5" />
+                <h2 className="text-base sm:text-lg font-bold text-forest">Danh Sách Buổi Huấn Luyện</h2>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold text-green-700">
                   <CheckCircle className="h-3 w-3" />
                   {enrollments.filter(e => e.status === "COMPLETED").length} hoàn thành
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold text-orange-700">
                   <Clock className="h-3 w-3" />
                   {enrollments.filter(e => e.status === "SCHEDULED").length} chờ
                 </span>
@@ -267,13 +268,19 @@ function SessionListPage() {
               onResult={openResultModal}
             />
             <div className="mt-4 border-t border-gray-200 pt-4">
-              <Pagination total={filteredSessions.length} page={page} pageSize={pageSize} onChange={setPage} />
+              <Pagination
+                currentPage={page}
+                totalPages={Math.ceil(filteredSessions.length / pageSize)}
+                onPageChange={setPage}
+                totalItems={filteredSessions.length}
+                itemsPerPage={pageSize}
+              />
             </div>
           </Card>
 
           <div className="space-y-6">
             <Card
-              className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0"
+              className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0 p-4 sm:p-5"
               title={
                 <div className="flex items-center gap-2">
                   <Zap className="h-5 w-5 text-sand" />

@@ -9,7 +9,7 @@ import CourseTable from "../components/CourseTable";
 import CourseFormModal from "../components/CourseFormModal";
 import Pagination from "@/components/common/Pagination";
 import type { Course } from "@/types/course";
-import { BookOpen, Target, Zap, Shield, TrendingUp, Award, Users, Calendar, Filter, Search, Plus, AlertCircle, FileText, Activity, ChevronRight, Crosshair, Heart, Brain } from "lucide-react";
+import { BookOpen, Target, Zap, Shield, TrendingUp, Award, Users, Calendar, Filter, Search, Plus, AlertCircle, FileText, Activity, ChevronRight, Crosshair, Heart, GraduationCap } from "lucide-react";
 
 function CourseListPage() {
   const courses = useTrainingStore((s) => s.courses);
@@ -97,36 +97,37 @@ function CourseListPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/20 to-gray-50">
-      <div className="space-y-6 p-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-8 text-sand shadow-2xl">
+      <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 md:p-6">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 md:p-8 text-sand shadow-xl sm:shadow-2xl">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
 
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-                <BookOpen className="h-8 w-8 text-sand" />
-              </div>
-              <div>
-                <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
-                  <span className="h-1 w-8 rounded-full bg-orange" />
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start justify-center sm:justify-start gap-3">
+                <div className="rounded-xl bg-white/10 p-2.5 sm:p-3 backdrop-blur-sm">
+                  <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-sand mt-0.5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand/80">
                   Quản Lý Đào Tạo
                 </p>
-                <h1 className="mb-2 text-3xl font-bold text-sand">Kho Khóa Huấn Luyện Số</h1>
-                <p className="text-sm font-medium text-sand/90">Hệ thống quản lý và phân loại khóa huấn luyện chiến thuật</p>
+              </div>
+              <div className="text-center sm:text-left">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-sand">Kho Khóa Huấn Luyện Số</h1>
+                <p className="mt-1 text-xs sm:text-sm font-medium text-sand/90 hidden sm:block">Hệ thống quản lý và phân loại khóa huấn luyện chiến thuật</p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-row gap-2 w-full sm:w-auto">
               <Button
                 variant="secondary"
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
+                className="flex-1 sm:flex-none bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand text-xs sm:text-sm px-3 py-2 justify-center"
                 onClick={() => window.location.reload()}
               >
                 <Activity className="mr-2 h-4 w-4" />
                 Làm mới
               </Button>
               <Button
-                className="bg-orange text-white hover:bg-orange/90 border-orange"
+                className="flex-1 sm:flex-none bg-orange text-white hover:bg-orange/90 border-orange text-xs sm:text-sm px-3 py-2 justify-center"
                 onClick={handleCreate}
               >
                 <Plus className="mr-2 h-4 w-4" />
@@ -136,11 +137,11 @@ function CourseListPage() {
           </div>
         </div>
 
-        <Card className="border-2 border-forest/10 bg-white shadow-lg">
-          <div className="grid gap-4 lg:grid-cols-[1.2fr,auto] lg:items-end">
+        <Card className="border-2 border-forest/10 bg-white shadow-lg p-3 sm:p-4 md:p-5">
+          <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.2fr,auto] lg:items-end">
             <div className="relative">
-              <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-                <Search className="h-4 w-4" />
+              <label className="mb-2 flex items-start gap-2 text-sm font-semibold text-forest">
+                <Search className="h-4 w-4 mt-0.5" />
                 Tìm kiếm khóa huấn luyện
               </label>
               <div className="relative">
@@ -154,22 +155,22 @@ function CourseListPage() {
               </div>
             </div>
             <div>
-              <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-forest">
-                <Filter className="h-4 w-4" />
+              <label className="mb-2 flex items-start gap-2 text-sm font-semibold text-forest">
+                <Filter className="h-4 w-4 mt-0.5" />
                 Bộ lọc nhanh
               </label>
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center rounded-lg border-2 border-gray-200 bg-gray-50 p-1">
+              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2">
+                <div className="flex items-center rounded-lg border-2 border-gray-200 bg-gray-50 p-1 w-full sm:w-auto overflow-x-auto">
                   {[
                     { key: "ALL", label: "Tất cả", icon: null },
                     { key: "FIRE", label: "Hỏa lực", icon: Crosshair },
                     { key: "PHYSICAL", label: "Thể lực", icon: Heart },
-                    { key: "THEORY", label: "Lý thuyết", icon: Brain },
+                    { key: "THEORY", label: "Lý thuyết", icon: GraduationCap },
                   ].map((item) => (
                     <button
                       key={item.key}
                       className={clsx(
-                        "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-all",
+                        "flex items-center gap-1.5 rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium transition-all whitespace-nowrap",
                         typeFilter === item.key
                           ? "bg-gradient-to-r from-forest to-olive text-white shadow-sm"
                           : "text-gray-600 hover:bg-white hover:text-forest"
@@ -182,9 +183,9 @@ function CourseListPage() {
                   ))}
                 </div>
 
-                <div className="mx-1 h-8 w-px bg-gray-300" />
+                <div className="hidden sm:block mx-1 h-8 w-px bg-gray-300" />
 
-                <div className="flex items-center rounded-lg border-2 border-gray-200 bg-gray-50 p-1">
+                <div className="flex items-center rounded-lg border-2 border-gray-200 bg-gray-50 p-1 w-full sm:w-auto">
                   {[
                     { key: "ALL", label: "Tất cả" },
                     { key: "REQ", label: "Bắt buộc" },
@@ -193,7 +194,7 @@ function CourseListPage() {
                     <button
                       key={item.key}
                       className={clsx(
-                        "rounded-md px-3 py-1.5 text-sm font-medium transition-all",
+                        "rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium transition-all",
                         requiredFilter === item.key
                           ? "bg-orange text-white shadow-sm"
                           : "text-gray-600 hover:bg-white hover:text-orange"
@@ -209,8 +210,8 @@ function CourseListPage() {
           </div>
         </Card>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-xl border border-forest/10 bg-white p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+        <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="group relative overflow-hidden rounded-xl border border-forest/10 bg-white p-3 sm:p-4 md:p-6 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
             <div className="absolute inset-0 bg-gradient-to-br from-forest/5 to-transparent" />
             <div className="relative">
               <div className="mb-3 flex items-center justify-between">
@@ -219,8 +220,8 @@ function CourseListPage() {
                 </div>
                 <span className="text-xs font-semibold text-green-600">Hoạt động</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Tổng số khóa</p>
-              <p className="text-2xl font-bold text-forest">{courses.length}</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Tổng số khóa</p>
+              <p className="text-xl sm:text-2xl font-bold text-forest">{courses.length}</p>
               <div className="mt-2 h-1 w-full rounded-full bg-gray-200">
                 <div className="h-full w-full rounded-full bg-gradient-to-r from-forest to-olive" />
               </div>
@@ -236,9 +237,9 @@ function CourseListPage() {
                 </div>
                 <span className="text-xs font-semibold text-red-600">Quan trọng</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Khóa bắt buộc</p>
-              <p className="text-2xl font-bold text-red-600">{requiredCount}</p>
-              <p className="mt-1 text-xs text-gray-500">Phải hoàn thành</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Khóa bắt buộc</p>
+              <p className="text-xl sm:text-2xl font-bold text-red-600">{requiredCount}</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Phải hoàn thành</p>
             </div>
           </div>
 
@@ -251,9 +252,9 @@ function CourseListPage() {
                 </div>
                 <span className="text-xs font-semibold text-blue-600">Bổ sung</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Khóa tùy chọn</p>
-              <p className="text-2xl font-bold text-blue-600">{optionalCount}</p>
-              <p className="mt-1 text-xs text-gray-500">Nâng cao kỹ năng</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Khóa tùy chọn</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-600">{optionalCount}</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Nâng cao kỹ năng</p>
             </div>
           </div>
 
@@ -266,14 +267,14 @@ function CourseListPage() {
                 </div>
                 <span className="text-xs font-semibold text-orange-600">Đã lên lịch</span>
               </div>
-              <p className="text-sm font-medium text-gray-600">Tổng buổi học</p>
-              <p className="text-2xl font-bold text-orange-600">{sessions.length}</p>
-              <p className="mt-1 text-xs text-gray-500">Đang triển khai</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Tổng buổi học</p>
+              <p className="text-xl sm:text-2xl font-bold text-orange-600">{sessions.length}</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-gray-500">Đang triển khai</p>
             </div>
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.2fr,0.8fr]">
           <Card className="border-2 border-border shadow-lg">
           <CourseTable
             courses={pagedCourses}
@@ -281,7 +282,13 @@ function CourseListPage() {
             onDelete={handleDelete}
             sessionCountByCourse={sessionCountByCourse}
           />
-          <Pagination total={filteredCourses.length} page={page} pageSize={pageSize} onChange={setPage} />
+          <Pagination
+            currentPage={page}
+            totalPages={Math.ceil(filteredCourses.length / pageSize)}
+            onPageChange={setPage}
+            totalItems={filteredCourses.length}
+            itemsPerPage={pageSize}
+          />
         </Card>
 
           <div className="space-y-6">
@@ -339,7 +346,7 @@ function CourseListPage() {
 
                   <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-sm transition-all hover:bg-white/20">
                     <div className="flex items-center gap-2">
-                      <Brain className="h-4 w-4 text-blue-400" />
+                      <GraduationCap className="h-4 w-4 text-blue-400" />
                       <div>
                         <p className="text-xs font-semibold text-sand">Lý thuyết</p>
                         <p className="text-lg font-bold text-sand">{courses.filter((c) => c.type === "THEORY").length}</p>

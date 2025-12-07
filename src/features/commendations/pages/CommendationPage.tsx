@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Card from "@/components/common/Card";
 import Button from "@/components/common/Button";
+import { Modal } from "@/components/ui/modal";
 import { Award, Trophy, Medal, Star, Users, User, Calendar, MapPin, Shield, Zap, ChevronRight, Plus, Download, TrendingUp, Target, Flag, Heart, GraduationCap, Sparkles, Crown, AlertCircle, Clock, CheckCircle } from "lucide-react";
 
 const unitPlans = [
@@ -18,6 +20,23 @@ const upcoming = [
 ];
 
 function CommendationPage() {
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [formData, setFormData] = useState({
+    type: "unit",
+    name: "",
+    unit: "",
+    reason: "",
+    date: ""
+  });
+
+  const handleCreateSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log("Đề xuất mới:", formData);
+    setShowCreateModal(false);
+    setFormData({ type: "unit", name: "", unit: "", reason: "", date: "" });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-yellow-50/20 to-gray-50">
       <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
@@ -45,6 +64,7 @@ function CommendationPage() {
                 <Button
                   variant="secondary"
                   className="w-full sm:w-auto bg-white/10 backdrop-blur-sm hover:bg-white/20 border-white/20 text-sand"
+                  onClick={() => setShowCreateModal(true)}
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Tạo đề xuất
@@ -342,38 +362,161 @@ function CommendationPage() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-xl border-2 border-yellow-300/30 bg-gradient-to-r from-yellow-50 via-orange-50/30 to-yellow-50 p-4 sm:p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 p-2">
-              <Zap className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="m-0 text-lg font-bold text-forest">Thông báo quan trọng</h3>
-          </div>
-          <div className="space-y-3">
-            <div className="rounded-lg bg-white/80 p-3">
-              <div className="mb-1 flex items-start gap-1">
-                <AlertCircle className="h-4 w-4 text-orange-600 mt-0.5" />
-                <p className="text-xs font-semibold uppercase text-gray-600">Hạn chót</p>
+        <div className="mt-6 rounded-xl relative overflow-hidden bg-gradient-to-br from-forest via-olive to-moss p-4 sm:p-6 shadow-2xl">
+          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-yellow-400/20 blur-3xl" />
+          <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-orange/10 blur-2xl" />
+          <div className="relative">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="rounded-lg bg-white/20 backdrop-blur-sm p-2">
+                <Zap className="h-6 w-6 text-sand" />
               </div>
-              <p className="text-sm text-gray-700">Nộp đề xuất trước 15/04</p>
+              <h3 className="m-0 text-lg font-bold text-sand">Thông báo quan trọng</h3>
             </div>
-            <div className="rounded-lg bg-white/80 p-3">
-              <div className="mb-1 flex items-start gap-1">
-                <TrendingUp className="h-4 w-4 text-green-600 mt-0.5" />
-                <p className="text-xs font-semibold uppercase text-gray-600">Tiến độ</p>
+            <div className="space-y-3">
+              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
+                <div className="mb-1 flex items-start gap-1">
+                  <AlertCircle className="h-4 w-4 text-orange mt-0.5" />
+                  <p className="text-xs font-semibold uppercase text-sand/70">Hạn chót</p>
+                </div>
+                <p className="text-sm text-sand/90">Nộp đề xuất trước 15/04</p>
               </div>
-              <p className="text-sm text-gray-700">60% đã hoàn tất thủ tục</p>
-            </div>
-            <div className="rounded-lg bg-white/80 p-3">
-              <div className="mb-1 flex items-start gap-1">
-                <Trophy className="h-4 w-4 text-yellow-600 mt-0.5" />
-                <p className="text-xs font-semibold uppercase text-gray-600">Quỹ thưởng</p>
+              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
+                <div className="mb-1 flex items-start gap-1">
+                  <TrendingUp className="h-4 w-4 text-green-400 mt-0.5" />
+                  <p className="text-xs font-semibold uppercase text-sand/70">Tiến độ</p>
+                </div>
+                <p className="text-sm text-sand/90">60% đã hoàn tất thủ tục</p>
               </div>
-              <p className="text-sm text-gray-700">Còn 85% ngân sách</p>
+              <div className="rounded-lg bg-white/10 backdrop-blur-sm p-3">
+                <div className="mb-1 flex items-start gap-1">
+                  <Trophy className="h-4 w-4 text-yellow-400 mt-0.5" />
+                  <p className="text-xs font-semibold uppercase text-sand/70">Quỹ thưởng</p>
+                </div>
+                <p className="text-sm text-sand/90">Còn 85% ngân sách</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal Tạo Đề Xuất */}
+      <Modal
+        open={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        title="Tạo Đề Xuất Khen Thưởng"
+      >
+        <form onSubmit={handleCreateSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Loại đề xuất
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, type: "unit" })}
+                className={`p-3 rounded-lg border-2 transition-all ${
+                  formData.type === "unit"
+                    ? "border-forest bg-forest/10 text-forest"
+                    : "border-gray-200 hover:border-forest/50"
+                }`}
+              >
+                <Users className="h-5 w-5 mx-auto mb-1" />
+                <span className="text-sm font-medium">Đơn vị</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, type: "individual" })}
+                className={`p-3 rounded-lg border-2 transition-all ${
+                  formData.type === "individual"
+                    ? "border-forest bg-forest/10 text-forest"
+                    : "border-gray-200 hover:border-forest/50"
+                }`}
+              >
+                <User className="h-5 w-5 mx-auto mb-1" />
+                <span className="text-sm font-medium">Cá nhân</span>
+              </button>
+            </div>
+          </div>
+
+          {formData.type === "individual" && (
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Họ và tên
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:border-forest focus:outline-none"
+                placeholder="Nhập họ và tên"
+                required
+              />
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Đơn vị
+            </label>
+            <select
+              value={formData.unit}
+              onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
+              className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:border-forest focus:outline-none"
+              required
+            >
+              <option value="">Chọn đơn vị</option>
+              <option value="Đại đội 1">Đại đội 1</option>
+              <option value="Đại đội 2">Đại đội 2</option>
+              <option value="Đại đội 3">Đại đội 3</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Lý do đề xuất
+            </label>
+            <textarea
+              value={formData.reason}
+              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+              className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:border-forest focus:outline-none"
+              placeholder="Mô tả thành tích và lý do đề xuất..."
+              rows={4}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Ngày đề xuất
+            </label>
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              className="w-full rounded-lg border-2 border-gray-200 px-3 py-2 text-sm focus:border-forest focus:outline-none"
+              required
+            />
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1"
+              onClick={() => setShowCreateModal(false)}
+            >
+              Hủy
+            </Button>
+            <Button
+              type="submit"
+              className="flex-1"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Tạo đề xuất
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

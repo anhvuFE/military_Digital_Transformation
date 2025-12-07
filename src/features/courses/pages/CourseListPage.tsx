@@ -7,6 +7,9 @@ import { useUiStore } from "@/store/uiStore";
 import { useTrainingStore } from "@/store/trainingStore";
 import CourseTable from "../components/CourseTable";
 import CourseFormModal from "../components/CourseFormModal";
+import CourseViewModal from "../components/CourseViewModal";
+import CourseEditModal from "../components/CourseEditModal";
+import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
 import Pagination from "@/components/common/Pagination";
 import type { Course } from "@/types/course";
 import { BookOpen, Target, Zap, Shield, TrendingUp, Award, Users, Calendar, Filter, Search, Plus, AlertCircle, FileText, Activity, ChevronRight, Crosshair, Heart, GraduationCap } from "lucide-react";
@@ -66,11 +69,38 @@ function CourseListPage() {
     );
   };
 
+  const handleView = (course: Course) => {
+    const sessionCount = sessionCountByCourse[course.id] ?? 0;
+    const enrollments = useTrainingStore.getState().enrollments;
+    const courseSessions = sessions.filter(s => s.courseId === course.id);
+    const enrollmentCount = courseSessions.reduce((total, session) => {
+      return total + enrollments.filter(e => e.sessionId === session.id).length;
+    }, 0);
+
+    openModal(
+      "Thông tin khóa học",
+      <CourseViewModal
+        course={course}
+        sessionCount={sessionCount}
+        enrollmentCount={enrollmentCount}
+        onEdit={() => {
+          closeModal();
+          handleEdit(course);
+        }}
+        onDelete={() => {
+          closeModal();
+          handleDelete(course);
+        }}
+        onClose={closeModal}
+      />,
+    );
+  };
+
   const handleEdit = (course: Course) => {
     openModal(
-      "Cập nhật khóa",
-      <CourseFormModal
-        initial={course}
+      "Cập nhật khóa học",
+      <CourseEditModal
+        course={course}
         onSubmit={(payload) => {
           updateCourse(course.id, payload);
           closeModal();
@@ -80,14 +110,14 @@ function CourseListPage() {
     );
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (course: Course) => {
     openModal(
-      "Xóa khóa",
-      <ConfirmDialog
-        title="Xóa khóa?"
-        message="Hành động không thể hoàn tác."
+      "Xác nhận xóa",
+      <DeleteConfirmModal
+        itemName={course.name}
+        itemType="khóa học"
         onConfirm={() => {
-          deleteCourse(id);
+          deleteCourse(course.id);
           closeModal();
         }}
         onCancel={closeModal}
@@ -276,6 +306,7 @@ function CourseListPage() {
           <Card className="border-2 border-border shadow-lg">
           <CourseTable
             courses={pagedCourses}
+            onView={handleView}
             onEdit={handleEdit}
             onDelete={handleDelete}
             sessionCountByCourse={sessionCountByCourse}

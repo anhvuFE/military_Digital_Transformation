@@ -183,7 +183,8 @@ function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr,0.7fr]">
+        <div className="space-y-6">
+          {/* Upcoming Sessions */}
           <div className="space-y-4">
             <div className="flex items-start gap-3 px-1 sm:px-0">
               <Calendar className="h-5 w-5 text-forest mt-0.5" />
@@ -202,8 +203,10 @@ function AdminDashboardPage() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            {/* Filter Bar */}
+          <div className="space-y-6">
+            {/* Unit Performance Cards */}
+            <div className="space-y-6">
+              {/* Filter Bar */}
             <div className="rounded-xl border border-gray-200 bg-white p-3 sm:p-4 shadow-sm">
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between">
@@ -297,19 +300,12 @@ function AdminDashboardPage() {
                 </button>
               </div>
               {expandedSections.excellent && (
-                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+                <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
                   {topUnits.map((u, idx) => (
                     <div
                       key={u.unitId}
-                      className="group relative overflow-hidden rounded-xl border border-green-200/50 bg-gradient-to-br from-white to-green-50/30 p-4 shadow-sm transition-all hover:shadow-lg hover:scale-[1.02]"
+                      className="group relative overflow-hidden rounded-xl border-2 border-green-200/50 bg-gradient-to-br from-white to-green-50/30 p-5 shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
                     >
-                      {/* Rank indicator */}
-                      <div className={`absolute top-0 left-0 w-full h-1 ${
-                        idx === 0 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
-                        idx === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
-                        'bg-gradient-to-r from-orange-400 to-orange-500'
-                      }`} />
-
                       {/* Unit info */}
                       <div className="mb-3">
                         <div className="flex items-center justify-between mb-1">
@@ -384,14 +380,12 @@ function AdminDashboardPage() {
                 </button>
               </div>
               {expandedSections.needSupport && (
-                <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2">
+                <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                   {weakUnits.map((u) => (
                     <div
                       key={u.unitId}
-                      className="group relative overflow-hidden rounded-xl border border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 p-4 shadow-sm transition-all hover:shadow-lg hover:scale-[1.02]"
+                      className="group relative overflow-hidden rounded-xl border-2 border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 p-5 shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
                     >
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-400" />
-
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <h4 className="font-bold text-forest text-lg">{units.find((x) => x.id === u.unitId)?.name ?? u.unitId}</h4>
@@ -580,6 +574,7 @@ function AdminDashboardPage() {
                 )}
               </div>
             )}
+          </div>
           </div>
         </div>
 

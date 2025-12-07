@@ -1,12 +1,13 @@
 import Button from "@/components/common/Button";
 import Tag from "@/components/common/Tag";
 import type { Course } from "@/types/course";
-import { Target, Heart, GraduationCap, Calendar, Shield, Edit2, Trash2, ChevronRight, Award, AlertTriangle } from "lucide-react";
+import { Target, Heart, GraduationCap, Calendar, Shield, Edit2, Trash2, Eye, ChevronRight, Award, AlertTriangle } from "lucide-react";
 
 interface Props {
   courses: Course[];
+  onView?: (course: Course) => void;
   onEdit: (course: Course) => void;
-  onDelete: (id: string) => void;
+  onDelete: (course: Course) => void;
   sessionCountByCourse?: Record<string, number>;
 }
 
@@ -28,7 +29,7 @@ const typeColor: Record<Course["type"], string> = {
   THEORY: "from-blue-500 to-indigo-500",
 };
 
-function CourseTable({ courses, onEdit, onDelete, sessionCountByCourse = {} }: Props) {
+function CourseTable({ courses, onView, onEdit, onDelete, sessionCountByCourse = {} }: Props) {
   if (!courses.length) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-gray-500">
@@ -53,8 +54,6 @@ function CourseTable({ courses, onEdit, onDelete, sessionCountByCourse = {} }: P
               key={course.id}
               className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-md transition-all hover:border-forest/30 hover:shadow-xl hover:-translate-y-1"
             >
-              <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${gradientColor}`} />
-
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 p-5">
                 <div className="flex items-start gap-4 flex-1">
                   <div className={`rounded-xl bg-gradient-to-br ${gradientColor} p-3 text-white shadow-lg`}>
@@ -104,6 +103,15 @@ function CourseTable({ courses, onEdit, onDelete, sessionCountByCourse = {} }: P
                 </div>
 
                 <div className="flex items-center gap-2 lg:gap-3">
+                  {onView && (
+                    <button
+                      onClick={() => onView(course)}
+                      className="inline-flex items-center gap-2 rounded-lg border-2 border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                    >
+                      <Eye className="h-4 w-4" />
+                      <span>XEM</span>
+                    </button>
+                  )}
                   <button
                     onClick={() => onEdit(course)}
                     className="inline-flex items-center gap-2 rounded-lg border-2 border-forest/20 bg-white px-4 py-2 text-sm font-semibold text-forest transition-all hover:border-forest hover:bg-forest hover:text-white"
@@ -112,7 +120,7 @@ function CourseTable({ courses, onEdit, onDelete, sessionCountByCourse = {} }: P
                     <span>SỬA</span>
                   </button>
                   <button
-                    onClick={() => onDelete(course.id)}
+                    onClick={() => onDelete(course)}
                     className="inline-flex items-center gap-2 rounded-lg border-2 border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -203,18 +211,27 @@ function CourseTable({ courses, onEdit, onDelete, sessionCountByCourse = {} }: P
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-3 border-t border-gray-100">
+                  {onView && (
+                    <button
+                      onClick={() => onView(course)}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border-2 border-blue-200 bg-white px-2 py-2 text-xs font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                      <span>XEM</span>
+                    </button>
+                  )}
                   <button
                     onClick={() => onEdit(course)}
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest/20 bg-white px-3 py-2 text-sm font-semibold text-forest transition-all hover:border-forest hover:bg-forest hover:text-white"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border-2 border-forest/20 bg-white px-2 py-2 text-xs font-semibold text-forest transition-all hover:border-forest hover:bg-forest hover:text-white"
                   >
-                    <Edit2 className="h-4 w-4" />
+                    <Edit2 className="h-3.5 w-3.5" />
                     <span>SỬA</span>
                   </button>
                   <button
-                    onClick={() => onDelete(course.id)}
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-red-200 bg-white px-3 py-2 text-sm font-semibold text-red-600 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
+                    onClick={() => onDelete(course)}
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border-2 border-red-200 bg-white px-2 py-2 text-xs font-semibold text-red-600 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-3.5 w-3.5" />
                     <span>XÓA</span>
                   </button>
                 </div>

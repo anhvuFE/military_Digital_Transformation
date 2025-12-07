@@ -3,7 +3,7 @@ import { Button as ShadcnButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "danger";
   fullWidth?: boolean;
 }
 
@@ -20,6 +20,8 @@ function Button({
         return "secondary";
       case "ghost":
         return "ghost";
+      case "danger":
+        return "destructive";
       default:
         return "default";
     }

@@ -81,6 +81,7 @@ interface TrainingState {
   deleteCourse: (id: string) => void;
   createSession: (payload: Omit<Session, "id">) => void;
   updateSession: (id: string, payload: Partial<Session>) => void;
+  deleteSession: (id: string) => void;
   setEnrollment: (payload: Omit<Enrollment, "id">) => void;
   getSessionEnrollments: (sessionId: string) => Enrollment[];
   getPersonalTimeline: (userId: string) => { session: Session; enrollment: Enrollment }[];
@@ -130,6 +131,13 @@ export const useTrainingStore = create<TrainingState>((set, get) => ({
   updateSession(id, payload) {
     set((state) => ({
       sessions: state.sessions.map((s) => (s.id === id ? { ...s, ...payload } : s)),
+    }));
+  },
+
+  deleteSession(id) {
+    set((state) => ({
+      sessions: state.sessions.filter((s) => s.id !== id),
+      enrollments: state.enrollments.filter((e) => e.sessionId !== id),
     }));
   },
 

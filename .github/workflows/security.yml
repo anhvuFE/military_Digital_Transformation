@@ -58,7 +58,7 @@ jobs:
             --enableExperimental
 
       - name: Upload results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: dependency-check-report
           path: reports/

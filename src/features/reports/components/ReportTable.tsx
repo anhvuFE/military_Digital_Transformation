@@ -27,26 +27,22 @@ function ReportTable({ rows }: Props) {
           <thead>
             <tr className="bg-gradient-to-r from-forest to-olive">
               <th className="px-6 py-4 text-left">
-                <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-sand">
-                  <Building2 className="h-4 w-4" />
+                <div className="text-sm font-bold uppercase tracking-wider text-sand">
                   Đơn vị
                 </div>
               </th>
               <th className="px-6 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-sand">
-                  <Calendar className="h-4 w-4" />
+                <div className="text-sm font-bold uppercase tracking-wider text-sand text-center">
                   Số buổi
                 </div>
               </th>
               <th className="px-6 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-sand">
-                  <TrendingUp className="h-4 w-4" />
+                <div className="text-sm font-bold uppercase tracking-wider text-sand text-center">
                   % Hoàn thành
                 </div>
               </th>
               <th className="px-6 py-4 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-sand">
-                  <Users className="h-4 w-4" />
+                <div className="text-sm font-bold uppercase tracking-wider text-sand text-center">
                   Số quân nhân chưa đủ
                 </div>
               </th>
@@ -63,19 +59,11 @@ function ReportTable({ rows }: Props) {
                   className="group transition-all hover:bg-gray-50"
                 >
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`h-10 w-1.5 rounded-full bg-gradient-to-b ${
-                        index === 0 ? 'from-yellow-500 to-yellow-600' :
-                        index === 1 ? 'from-gray-400 to-gray-500' :
-                        index === 2 ? 'from-orange-400 to-orange-500' :
-                        'from-forest to-olive'
-                      }`} />
-                      <div>
-                        <p className="font-bold text-gray-900 group-hover:text-forest transition-colors whitespace-nowrap">
-                          {row.unitName}
-                        </p>
-                        <p className="text-xs text-gray-500 whitespace-nowrap">ID: {row.unitId}</p>
-                      </div>
+                    <div>
+                      <p className="font-bold text-gray-900 group-hover:text-forest transition-colors whitespace-nowrap">
+                        {row.unitName}
+                      </p>
+                      <p className="text-xs text-gray-500 whitespace-nowrap">ID: {row.unitId}</p>
                     </div>
                   </td>
 
@@ -141,17 +129,9 @@ function ReportTable({ rows }: Props) {
               className="card p-4 shadow-sm hover:shadow-md transition-all"
             >
               <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className={`h-8 w-1.5 rounded-full bg-gradient-to-b ${
-                    index === 0 ? 'from-yellow-500 to-yellow-600' :
-                    index === 1 ? 'from-gray-400 to-gray-500' :
-                    index === 2 ? 'from-orange-400 to-orange-500' :
-                    'from-forest to-olive'
-                  }`} />
-                  <div>
-                    <h4 className="font-bold text-forest">{row.unitName}</h4>
-                    <p className="text-xs text-gray-500">ID: {row.unitId}</p>
-                  </div>
+                <div>
+                  <h4 className="font-bold text-forest">{row.unitName}</h4>
+                  <p className="text-xs text-gray-500">ID: {row.unitId}</p>
                 </div>
 
                 <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${badge.color}`}>

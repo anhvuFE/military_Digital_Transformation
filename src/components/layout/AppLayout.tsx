@@ -32,9 +32,11 @@ function AppLayout({ children }: Props) {
   return (
     <div className="app-shell bg-bg">
       <Sidebar className="hidden lg:flex" />
-      <div className="flex min-h-screen flex-col">
+      <div className="flex flex-col flex-1 h-screen overflow-hidden">
         <Topbar />
-        <main className="page">{children}</main>
+        <main className="flex-1 overflow-y-auto">
+          <div className="page">{children}</div>
+        </main>
       </div>
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 flex lg:hidden">

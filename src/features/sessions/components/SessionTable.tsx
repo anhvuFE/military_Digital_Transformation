@@ -45,7 +45,6 @@ function SessionTable({ sessions, courses, units, enrollmentsBySession = {}, onE
               key={session.id}
               className="group relative overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-md transition-all hover:border-forest/30 hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-forest via-olive to-moss" />
 
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 p-5">
                 <div className="flex-1">

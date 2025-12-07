@@ -7,6 +7,8 @@ import SessionFilterBar, { SessionFilters } from "../components/SessionFilterBar
 import SessionTable from "../components/SessionTable";
 import SessionFormModal from "../components/SessionFormModal";
 import SessionResultModal from "../components/SessionResultModal";
+import SessionViewModal from "../components/SessionViewModal";
+import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
 import Pagination from "@/components/common/Pagination";
 import type { Session } from "@/types/session";
 import { Calendar, Clock, Users, Target, MapPin, Plus, Search, Filter, Activity, TrendingUp, AlertCircle, Award, Shield, Zap, ChevronRight, Radio, CheckCircle, XCircle } from "lucide-react";
@@ -18,6 +20,7 @@ function SessionListPage() {
   const setEnrollment = useTrainingStore((s) => s.setEnrollment);
   const createSession = useTrainingStore((s) => s.createSession);
   const updateSession = useTrainingStore((s) => s.updateSession);
+  const deleteSession = useTrainingStore((s) => s.deleteSession);
   const enrollments = useTrainingStore((s) => s.enrollments);
   const { openModal, closeModal } = useUiStore();
 

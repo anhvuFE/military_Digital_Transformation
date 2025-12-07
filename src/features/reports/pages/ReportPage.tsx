@@ -186,116 +186,105 @@ function ReportPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-[300px,1fr] xl:grid-cols-[350px,1fr]">
-          <div className="space-y-4 sm:space-y-6">
-            <Card className="border-2 border-forest/10 bg-white shadow-lg p-3 sm:p-4 md:p-5">
-              <div className="mb-4 flex items-start gap-2">
-                <Filter className="h-5 w-5 text-forest mt-0.5" />
-                <h3 className="font-bold text-forest">Bộ Lọc Báo Cáo</h3>
-              </div>
-              <ReportFilterBar units={units} filter={filter} onChange={setFilter} />
-            </Card>
+        <div className="space-y-6">
 
-            <Card
-              className="bg-gradient-to-br from-forest to-olive text-white shadow-lg border-0 p-4 sm:p-5"
-              title={
-                <div className="flex items-start gap-2">
+          <Card className="border-2 border-border shadow-lg p-3 sm:p-4 md:p-5">
+            <div className="mb-6 grid gap-4 grid-cols-1 lg:grid-cols-2">
+              {/* Thống Kê Nhanh */}
+              <div className="bg-gradient-to-br from-forest to-olive text-white shadow-lg rounded-xl p-4">
+                <div className="flex items-start gap-2 mb-4">
                   <BarChart3 className="h-5 w-5 text-sand mt-0.5" />
                   <span className="font-bold text-sand">Thống Kê Nhanh</span>
                 </div>
-              }
-            >
-              <div className="space-y-3">
-                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
-                  <h4 className="mb-3 flex items-start gap-2 text-sm font-semibold text-sand">
-                    <Target className="h-4 w-4 mt-0.5" />
-                    Top đơn vị xuất sắc
-                  </h4>
-                  <div className="space-y-2">
-                    {rows
-                      .sort((a, b) => b.completionRate - a.completionRate)
-                      .slice(0, 3)
-                      .map((row, idx) => (
-                        <div key={row.unitId} className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <div className={`flex h-6 w-6 items-center justify-center rounded text-xs font-bold ${
-                              idx === 0 ? 'bg-yellow-500' :
-                              idx === 1 ? 'bg-gray-400' :
-                              'bg-orange-600'
-                            }`}>
-                              {idx + 1}
+                <div className="space-y-3">
+                  <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
+                    <h4 className="mb-3 flex items-start gap-2 text-sm font-semibold text-sand">
+                      <Target className="h-4 w-4 mt-0.5" />
+                      Top đơn vị xuất sắc
+                    </h4>
+                    <div className="space-y-2">
+                      {rows
+                        .sort((a, b) => b.completionRate - a.completionRate)
+                        .slice(0, 3)
+                        .map((row, idx) => (
+                          <div key={row.unitId} className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className={`flex h-6 w-6 items-center justify-center rounded text-xs font-bold ${
+                                idx === 0 ? 'bg-yellow-500' :
+                                idx === 1 ? 'bg-gray-400' :
+                                'bg-orange-600'
+                              }`}>
+                                {idx + 1}
+                              </div>
+                              <span className="text-xs text-sand/90">{row.unitName}</span>
                             </div>
-                            <span className="text-xs text-sand/90">{row.unitName}</span>
+                            <span className="text-sm font-bold text-sand">{row.completionRate}%</span>
                           </div>
-                          <span className="text-sm font-bold text-sand">{row.completionRate}%</span>
-                        </div>
-                      ))}
+                        ))}
+                    </div>
                   </div>
-                </div>
-
-                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
-                  <h4 className="mb-3 flex items-start gap-2 text-sm font-semibold text-sand">
-                    <AlertTriangle className="h-4 w-4 mt-0.5" />
-                    Cần cải thiện
-                  </h4>
-                  <div className="space-y-2">
-                    {rows
-                      .filter(r => r.completionRate < 50)
-                      .slice(0, 2)
-                      .map((row) => (
-                        <div key={row.unitId} className="flex items-center justify-between">
-                          <span className="text-xs text-sand/90">{row.unitName}</span>
-                          <span className="text-xs font-semibold text-orange">{row.pendingSoldiers} thiếu</span>
-                        </div>
-                      ))}
+                  <div className="rounded-lg bg-white/10 p-3 backdrop-blur-sm">
+                    <h4 className="mb-3 flex items-start gap-2 text-sm font-semibold text-sand">
+                      <AlertTriangle className="h-4 w-4 mt-0.5" />
+                      Cần cải thiện
+                    </h4>
+                    <div className="space-y-2">
+                      {rows
+                        .filter(r => r.completionRate < 50)
+                        .slice(0, 2)
+                        .map((row) => (
+                          <div key={row.unitId} className="flex items-center justify-between">
+                            <span className="text-xs text-sand/90">{row.unitName}</span>
+                            <span className="text-xs font-semibold text-orange">{row.pendingSoldiers} thiếu</span>
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                </div>
-
-                <button className="group flex w-full items-center justify-between rounded-lg bg-orange p-3 text-white transition-all hover:bg-orange/90 hover:shadow-md">
-                  <span className="text-sm font-medium">Phân tích chi tiết</span>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </Card>
-
-            <Card className="border-2 border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 shadow-lg p-3 sm:p-4 md:p-5">
-              <div className="mb-3 flex items-start gap-2">
-                <PieChart className="h-5 w-5 text-orange-600 mt-0.5" />
-                <h3 className="font-bold text-forest">Phân bố kết quả</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between rounded-lg bg-green-50 p-3">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5" />
-                    <span className="text-sm font-medium text-green-700">Hoàn thành tốt</span>
-                  </div>
-                  <span className="font-bold text-green-700">
-                    {rows.filter(r => r.completionRate >= 80).length}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between rounded-lg bg-orange-50 p-3">
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-orange-600 mt-0.5" />
-                    <span className="text-sm font-medium text-orange-700">Đang tiến hành</span>
-                  </div>
-                  <span className="font-bold text-orange-700">
-                    {rows.filter(r => r.completionRate >= 50 && r.completionRate < 80).length}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between rounded-lg bg-red-50 p-3">
-                  <div className="flex items-start gap-2">
-                    <XCircle className="h-4 w-4 text-red-600 mt-0.5" />
-                    <span className="text-sm font-medium text-red-700">Cần hỗ trợ</span>
-                  </div>
-                  <span className="font-bold text-red-700">
-                    {rows.filter(r => r.completionRate < 50).length}
-                  </span>
+                  <button className="group flex w-full items-center justify-between rounded-lg bg-orange p-3 text-white transition-all hover:bg-orange/90 hover:shadow-md">
+                    <span className="text-sm font-medium">Phân tích chi tiết</span>
+                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </button>
                 </div>
               </div>
-            </Card>
-          </div>
 
-          <Card className="border-2 border-border shadow-lg p-3 sm:p-4 md:p-5">
+              {/* Phân bố kết quả */}
+              <div className="border-2 border-orange-200/50 bg-gradient-to-br from-white to-orange-50/30 shadow-lg rounded-xl p-4">
+                <div className="mb-3 flex items-start gap-2">
+                  <PieChart className="h-5 w-5 text-orange-600 mt-0.5" />
+                  <h3 className="font-bold text-forest">Phân bố kết quả</h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between rounded-lg bg-green-50 p-3">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5" />
+                      <span className="text-sm font-medium text-green-700">Hoàn thành tốt</span>
+                    </div>
+                    <span className="font-bold text-green-700">
+                      {rows.filter(r => r.completionRate >= 80).length}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg bg-orange-50 p-3">
+                    <div className="flex items-start gap-2">
+                      <Clock className="h-4 w-4 text-orange-600 mt-0.5" />
+                      <span className="text-sm font-medium text-orange-700">Đang tiến hành</span>
+                    </div>
+                    <span className="font-bold text-orange-700">
+                      {rows.filter(r => r.completionRate >= 50 && r.completionRate < 80).length}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg bg-red-50 p-3">
+                    <div className="flex items-start gap-2">
+                      <XCircle className="h-4 w-4 text-red-600 mt-0.5" />
+                      <span className="text-sm font-medium text-red-700">Cần hỗ trợ</span>
+                    </div>
+                    <span className="font-bold text-red-700">
+                      {rows.filter(r => r.completionRate < 50).length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="mb-3 sm:mb-4 border-b border-gray-200 pb-3 sm:pb-4">
               <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div className="flex items-start gap-2">
